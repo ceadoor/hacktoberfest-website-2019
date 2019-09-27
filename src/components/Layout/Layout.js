@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import './styles.scss';
 import Loader from '../Loader';
+
+const BodyWrapper = styled.main`
+    position: relative;
+    min-height: 100vh;
+    .content__wrapper {
+        min-height: 100vh;
+        width: 100%;
+    }
+`;
 
 class Wrapper extends Component {
     componentDidMount() {
@@ -14,9 +23,9 @@ class Wrapper extends Component {
         const isPageLoading = false;
         const renderContent = isPageLoading ? <Loader /> : children;
         return (
-            <main id="wrapper">
+            <BodyWrapper>
                 <div className="content__wrapper">{renderContent}</div>
-            </main>
+            </BodyWrapper>
         );
     }
 }

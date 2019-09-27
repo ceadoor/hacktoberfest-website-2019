@@ -1,16 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-import './styles.scss';
+const StyledSection = styled.section`
+    height: 100vh;
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        flex-direction: column;
+        p {
+            color: ${({ theme }) => {
+                return theme.pink;
+            }};
+            font-size: 2em;
+            font-weight: ${({ theme }) => {
+                return theme.bold;
+            }};
+        }
+    }
+`;
 
 const NotFound = () => {
     return (
-        <section id="notFound">
+        <StyledSection>
             <div>
                 <p>You seem lost</p>
                 <Link to="/">Get Me Home</Link>
             </div>
-        </section>
+        </StyledSection>
     );
 };
 

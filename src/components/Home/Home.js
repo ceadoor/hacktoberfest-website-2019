@@ -1,15 +1,13 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 
-import './styles.scss';
+import Background from '../../static/Hacktoberfest_19_Events_2050x1025.png';
 
 const HomePage = () => {
     return (
         <Container>
             <section id="home">
-                <div className="text-center">
-                    <p>Hello World!</p>
-                </div>
+                <img src={Background} alt="background" />
             </section>
         </Container>
     );

@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 
-import './styles.scss';
-
 const Header = () => {
     return (
         <Navbar bg="dark" variant="dark">
