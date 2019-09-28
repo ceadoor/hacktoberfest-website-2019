@@ -3,6 +3,7 @@ import { Image, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 import styled from 'styled-components';
+import Tilt from 'react-tilt';
 
 import Logo from '../../static/logo.svg';
 
@@ -63,7 +64,11 @@ const HeroSection = () => {
     return (
         <StyledRow>
             <Col md={7}>
-                <Image src={Logo} fluid />
+                <Tilt className="Tilt" options={{ max: 20, scale: 1.05 }}>
+                    <div className="Tilt-inner">
+                        <Image src={Logo} fluid />
+                    </div>
+                </Tilt>
             </Col>
             <Col md={5}>
                 <div className="hero__body">
