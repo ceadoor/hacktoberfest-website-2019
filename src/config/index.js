@@ -42,4 +42,45 @@ module.exports = {
             },
         },
     },
+    heroProjects: {
+        text: 'You can contribute to any project on GitHub. Here are a few looking for some help:',
+        projects: [
+            {
+                name: 'Project 1',
+                desc: 'Not yet ready for PR',
+                url: 'https://github.com/ceadoor',
+                language: 'JavaScript',
+            },
+            {
+                name: 'Project 2',
+                desc: 'Not yet ready for PR',
+                url: 'https://github.com/ceadoor',
+                language: 'JavaScript',
+            },
+            {
+                name: 'Project 3',
+                desc: 'Not yet ready for PR',
+                url: 'https://github.com/ceadoor',
+                language: 'JavaScript',
+            },
+            {
+                name: 'Project 4',
+                desc: 'Not yet ready for PR',
+                url: 'https://github.com/ceadoor',
+                language: 'JavaScript',
+            },
+            {
+                name: 'Project 5',
+                desc: 'Not yet ready for PR',
+                url: 'https://github.com/ceadoor',
+                language: 'JavaScript',
+            },
+            {
+                name: 'Project 6',
+                desc: 'Not yet ready for PR',
+                url: 'https://github.com/ceadoor',
+                language: 'JavaScript',
+            },
+        ],
+    },
 };

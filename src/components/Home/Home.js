@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap';
 import HeroSection from './HeroSection';
 import DetailsSection from './DetailsSection';
 import RulesSection from './RulesSection';
+import ProjectsSection from './ProjectsSection';
 
 const HomePage = () => {
     return (
@@ -17,6 +18,7 @@ const HomePage = () => {
                 <HeroSection />
                 <DetailsSection />
                 <RulesSection />
+                <ProjectsSection />
             </Container>
         </section>
     );
