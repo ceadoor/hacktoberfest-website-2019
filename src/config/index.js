@@ -20,4 +20,6 @@ module.exports = {
     },
 
     githubLink: 'https://github.com/ceadoor',
+
+    heroText: 'Participate in event and earn a <span>limited edition T-shirt</span>!',
 };

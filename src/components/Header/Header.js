@@ -28,24 +28,15 @@ const StyledNavbar = styled(Navbar)`
             border-bottom: 2px solid rgb(255, 249, 34);
         }
     }
-    .register {
-        margin-left: 1.875rem;
-        color: ${({ theme }) => {
-            return theme.white;
-        }};
-        background-color: ${({ theme }) => {
-            return theme.blue;
-        }};
-        border: none !important;
-        border-radius: 0;
-
-        &:hover {
-            background-color: ${({ theme }) => {
-                return theme.lightWhite;
-            }};
-            color: ${({ theme }) => {
-                return theme.darkPink;
-            }};
+    @media screen and (max-width: ${({ theme }) => {
+            return theme.screenXxsMax;
+        }}) {
+        .navbar-nav {
+            flex-direction: column;
+            .nav-link,
+            .register__button {
+                margin-left: 1rem;
+            }
         }
     }
 `;
@@ -59,12 +50,12 @@ const Header = () => {
             <Nav className="ml-auto">
                 {navLinks.map(item => {
                     return (
-                        <Link to={item.url} className="nav-link">
+                        <Link to={item.url} key={item.name} className="nav-link">
                             {item.name}
                         </Link>
                     );
                 })}
-                <Link to={registerButton.url || '/'} className="btn register">
+                <Link to={registerButton.url || '/'} className="btn register__button">
                     {registerButton.name || 'Register'}
                 </Link>
             </Nav>

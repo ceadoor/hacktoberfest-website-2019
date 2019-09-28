@@ -1,3 +1,16 @@
 .pt-20 {
   padding-top: 20px;
 }
+
+.register__button {
+  margin-left: 1.875rem;
+  color: $white;
+  background-color: $blue;
+  border: none !important;
+  border-radius: 0;
+
+  &:hover {
+    background-color: $lightWhite;
+    color: darkPink;
+  }
+}
