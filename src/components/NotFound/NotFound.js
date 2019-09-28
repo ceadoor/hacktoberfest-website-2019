@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledSection = styled.section`
-    height: 100vh;
+    height: 70vh;
     div {
         display: flex;
         justify-content: center;
@@ -12,12 +12,19 @@ const StyledSection = styled.section`
         flex-direction: column;
         p {
             color: ${({ theme }) => {
-                return theme.pink;
+                return theme.lightBluishWhite;
             }};
             font-size: 2em;
             font-weight: ${({ theme }) => {
                 return theme.bold;
             }};
+        }
+        a {
+            color: ${({ theme }) => {
+                return theme.lightWhite;
+            }};
+            padding-bottom: 5px;
+            border-bottom: 2px solid rgb(255, 249, 34);
         }
     }
 `;

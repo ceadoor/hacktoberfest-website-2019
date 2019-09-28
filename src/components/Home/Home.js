@@ -1,15 +1,26 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Image, Row, Col } from 'react-bootstrap';
+import styled from 'styled-components';
 
-import Background from '../../static/Hacktoberfest_19_Events_2050x1025.png';
+import Logo from '../../static/logo.svg';
+
+const StyledSection = styled.section`
+    padding: 30px auto;
+    height: 100vh;
+`;
 
 const HomePage = () => {
     return (
-        <Container>
-            <section id="home">
-                <img src={Background} alt="background" />
-            </section>
-        </Container>
+        <StyledSection>
+            <Container>
+                <Row>
+                    <Col md={6}>
+                        <Image src={Logo} fluid />
+                    </Col>
+                    <Col md={6} />
+                </Row>
+            </Container>
+        </StyledSection>
     );
 };
 

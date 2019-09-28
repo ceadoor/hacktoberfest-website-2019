@@ -7,11 +7,13 @@ import Layout from '../components/Layout';
 
 const IndexPage = () => {
     return (
-        <Layout>
+        <>
             <Header />
-            <Home />
-            <Footer />
-        </Layout>
+            <Layout>
+                <Home />
+            </Layout>
+            {/* <Footer /> */}
+        </>
     );
 };
 
