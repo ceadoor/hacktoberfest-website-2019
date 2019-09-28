@@ -12,7 +12,7 @@ const IndexPage = () => {
             <Layout>
                 <Home />
             </Layout>
-            {/* <Footer /> */}
+            <Footer />
         </>
     );
 };

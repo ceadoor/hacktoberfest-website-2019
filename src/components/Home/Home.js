@@ -11,7 +11,6 @@ const HomePage = () => {
         <section
             style={{
                 padding: '30px auto',
-                height: '100vh',
             }}
         >
             <Container>
