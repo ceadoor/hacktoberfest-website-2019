@@ -8,6 +8,9 @@ import TraceLogo from '../../static/trace-logo.png';
 import { registerButton, navLinks } from '../../config';
 
 const StyledNavbar = styled(Navbar)`
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
     img {
         outline: none !important;
         transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
@@ -55,7 +58,11 @@ const Header = () => {
                         </Link>
                     );
                 })}
-                <Link to={registerButton.url || '/'} className="btn register__button">
+                <Link
+                    to={registerButton.url || '/'}
+                    className="btn register__button"
+                    style={{ textTransform: 'uppercase' }}
+                >
                     {registerButton.name || 'Register'}
                 </Link>
             </Nav>
