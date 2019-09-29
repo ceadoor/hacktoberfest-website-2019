@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Image, Container } from 'react-bootstrap';
 import styled from 'styled-components';
+import Tilt from 'react-tilt';
 
 import { domain, twitterShare, githubLink, slackLink, instagramLink } from '../../config';
 import DOC from '../../static/Hacktoberfest_19_Events_lockup_ko_600x200.png';
@@ -71,6 +72,7 @@ const StyledFooter = styled.footer`
             color: white;
             font-size: 15px;
             padding-bottom: 20px;
+            text-align: center;
         }
     }
     .footer__social {
@@ -141,8 +143,12 @@ const Footer = () => {
                         </div>
                     </Col>
                     <Col md={5} className="doc__logo--wrapper">
-                        <Image src={DOC} fluid />
-                        <p>Powered by TRACECEA</p>
+                        <Tilt className="Tilt" options={{ max: 20, scale: 1.05 }}>
+                            <div className="Tilt-inner">
+                                <Image src={DOC} fluid />
+                                <p>Powered by TRACECEA</p>
+                            </div>
+                        </Tilt>
                     </Col>
                 </Row>
 
@@ -187,7 +193,7 @@ const Footer = () => {
                 <Row>
                     <Col md={12}>
                         <p className="footer__text">
-                            &copy; 2019 <a href="https://github.com/ceadoor">TRACECEA.</a> ALL RIGHTS RESERVED.
+                            &copy; 2019 <a href={githubLink}>TRACECEA.</a> ALL RIGHTS RESERVED.
                         </p>
                     </Col>
                 </Row>
