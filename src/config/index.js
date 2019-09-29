@@ -19,6 +19,10 @@ module.exports = {
         url: '/register',
     },
 
+    /**
+     *  HOME PAGE
+     */
+
     heroText: 'Participate in event and earn a <span>limited edition T-shirt</span>!',
     heroDetails: {
         desc:
@@ -82,7 +86,7 @@ module.exports = {
         ],
     },
     homeSession: {
-        text: 'Celebrate and support open source technology by attending the local event.',
+        text: 'Hacktoberfest is a month-long celebration of open source software.',
         session: [
             {
                 id: '01',
@@ -113,4 +117,22 @@ module.exports = {
     instagramLink: 'https://instagram.com/tracecea',
     slackLink:
         'https://ceadoor.slack.com/join/shared_invite/enQtNDIwNzUxNDgyMjc4LWFkZDhiNzYxOWI4OWY5OGQ2NDY0NzY4NGU5OTUxMDlkNjQxOTI3MWFjNWM3ZWJhOWRhYzcxY2FlMDk5OGQwNjg',
+
+    /**
+     *  DETAILS PAGE
+     */
+
+    routeSession: {
+        text: 'Celebrate and support open source technology by attending the local event.',
+        session: [
+            { id: '01', title: 'Who', sub: 'Hacktoberfest is open to everyone in our global community.' },
+            { id: '02', title: 'Where', sub: 'College of Engineering, Adoor' },
+            {
+                id: '03',
+                title: 'How',
+                sub: 'Make 5 pull requests to GitHub-hosted repositories.',
+            },
+            { id: '04', title: 'When', sub: 'Exact date to be declared soon' },
+        ],
+    },
 };

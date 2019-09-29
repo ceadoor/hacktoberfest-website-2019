@@ -2,16 +2,18 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 
-import { homeSession } from '../../config';
+import { routeSession } from '../../config';
+import { CalendarIcon, GitHubIcon, MapMarkerIcon, UsersIcon } from '../Icons';
 
 const StyledWrapper = styled(Row)`
     margin-bottom: 130px;
     .subtext {
         margin: 24px 0px 24px 0px;
-        max-width: 620px;
+        max-width: 650px;
     }
     .subhead {
         padding-top: 40px;
+        max-width: 620px;
     }
     .card__wrapper {
         display: flex;
@@ -93,19 +95,33 @@ const StyledWrapper = styled(Row)`
     }
 `;
 
+const getIcon = name => {
+    // eslint-disable-next-line default-case
+    switch (name) {
+        case '01':
+            return <UsersIcon />;
+        case '02':
+            return <MapMarkerIcon />;
+        case '03':
+            return <GitHubIcon />;
+        case '04':
+            return <CalendarIcon />;
+    }
+};
+
 const renderCard = ({ item, index }) => {
     const { id, title, sub } = item;
     return (
         <div key={index} className="flex__card--holder">
-            <span className="id">{id}</span>
+            <span className="id">{getIcon(id)}</span>
             <span className="title">{title}</span>
             <span className="subtitle">{sub}</span>
         </div>
     );
 };
 
-const EventSection = () => {
-    const { text, session } = homeSession;
+const RouteSection = () => {
+    const { text, session } = routeSession;
     return (
         <StyledWrapper>
             <Col md={12}>
@@ -121,4 +137,4 @@ const EventSection = () => {
     );
 };
 
-export default EventSection;
+export default RouteSection;

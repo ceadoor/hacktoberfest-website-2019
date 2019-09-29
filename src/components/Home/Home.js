@@ -5,7 +5,7 @@ import HeroSection from './HeroSection';
 import DetailsSection from './DetailsSection';
 import RulesSection from './RulesSection';
 import ProjectsSection from './ProjectsSection';
-import EventSection from './EventSection';
+import RouteSection from './RouteSection';
 
 const HomePage = () => {
     return (
@@ -17,9 +17,9 @@ const HomePage = () => {
             <Container>
                 <HeroSection />
                 <DetailsSection />
+                <RouteSection />
                 <RulesSection />
                 <ProjectsSection />
-                <EventSection />
             </Container>
         </section>
     );

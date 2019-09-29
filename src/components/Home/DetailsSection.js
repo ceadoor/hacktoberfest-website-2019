@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { heroDetails } from '../../config';
 
 const StyledWrapper = styled(Row)`
+    margin-bottom: 130px;
     h2 {
         padding-top: 40px;
     }
