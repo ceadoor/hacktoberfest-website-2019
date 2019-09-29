@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { heroRules } from '../../config';
 
 const StyledWrapper = styled(Row)`
-    margin-bottom: 180px;
+    margin-bottom: 170px;
     h1 {
         padding-top: 40px;
         margin-bottom: 1.5rem;
