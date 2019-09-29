@@ -19,8 +19,6 @@ module.exports = {
         url: '/register',
     },
 
-    githubLink: 'https://github.com/ceadoor',
-
     heroText: 'Participate in event and earn a <span>limited edition T-shirt</span>!',
     heroDetails: {
         desc:
@@ -108,4 +106,11 @@ module.exports = {
             },
         ],
     },
+
+    domain: '',
+    twitterShare: '',
+    githubLink: 'https://github.com/ceadoor',
+    instagramLink: 'https://instagram.com/tracecea',
+    slackLink:
+        'https://ceadoor.slack.com/join/shared_invite/enQtNDIwNzUxNDgyMjc4LWFkZDhiNzYxOWI4OWY5OGQ2NDY0NzY4NGU5OTUxMDlkNjQxOTI3MWFjNWM3ZWJhOWRhYzcxY2FlMDk5OGQwNjg',
 };

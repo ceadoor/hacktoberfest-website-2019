@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { heroDetails } from '../../config';
 
 const StyledWrapper = styled(Row)`
-    h1 {
+    h2 {
         padding-top: 40px;
     }
     p {
@@ -35,7 +35,7 @@ const DetailsSection = () => {
     return (
         <StyledWrapper>
             <Col md={10}>
-                <h1 className="subhead">Event Details</h1>
+                <h2 className="subhead">Event Details</h2>
                 <p className="subtext">{desc}</p>
                 <ul>
                     {list.map((item, index) => {

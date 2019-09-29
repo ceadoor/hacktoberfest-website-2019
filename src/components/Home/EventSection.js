@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { homeSession } from '../../config';
 
 const StyledWrapper = styled(Row)`
+    margin-bottom: 130px;
     .subtext {
         margin: 24px 0px 24px 0px;
         max-width: 620px;
@@ -103,7 +104,7 @@ const renderCard = ({ item, index }) => {
     );
 };
 
-const RouteSection = () => {
+const EventSection = () => {
     const { text, session } = homeSession;
     return (
         <StyledWrapper>
@@ -120,4 +121,4 @@ const RouteSection = () => {
     );
 };
 
-export default RouteSection;
+export default EventSection;

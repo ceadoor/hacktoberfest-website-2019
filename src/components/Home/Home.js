@@ -5,7 +5,7 @@ import HeroSection from './HeroSection';
 import DetailsSection from './DetailsSection';
 import RulesSection from './RulesSection';
 import ProjectsSection from './ProjectsSection';
-import RouteSection from './RouteSection';
+import EventSection from './EventSection';
 
 const HomePage = () => {
     return (
@@ -19,7 +19,7 @@ const HomePage = () => {
                 <DetailsSection />
                 <RulesSection />
                 <ProjectsSection />
-                <RouteSection />
+                <EventSection />
             </Container>
         </section>
     );
