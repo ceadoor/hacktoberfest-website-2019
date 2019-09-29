@@ -43,7 +43,7 @@ module.exports = {
         },
     },
     heroProjects: {
-        text: 'You can contribute to any project on GitHub. Here are a few looking for some help:',
+        text: 'You can contribute to any project on GitHub. Here are a few prepared for you:',
         projects: [
             {
                 name: 'Project 1',
@@ -80,6 +80,31 @@ module.exports = {
                 desc: 'Not yet ready for PR',
                 url: 'https://github.com/ceadoor',
                 language: 'JavaScript',
+            },
+        ],
+    },
+    homeSession: {
+        text: 'Celebrate and support open source technology by attending the local event.',
+        session: [
+            {
+                id: '01',
+                title: 'Intro',
+                sub: 'The Prizes, Instructions & Introduction',
+            },
+            {
+                id: '02',
+                title: 'A Talk on Git',
+                sub: 'Understanding How to Work with Git',
+            },
+            {
+                id: '03',
+                title: 'Dive into Coding',
+                sub: 'Set-ups & Live Coding Session',
+            },
+            {
+                id: '04',
+                title: 'Hack Time',
+                sub: 'Time for Pull-Requests',
             },
         ],
     },

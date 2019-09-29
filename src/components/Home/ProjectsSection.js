@@ -2,9 +2,11 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 
-import { heroProjects } from '../../config';
+import { heroProjects, githubLink } from '../../config';
 
 const StyledWrapper = styled(Row)`
+    margin-bottom: 140px;
+
     h2 {
         padding-top: 40px;
     }
@@ -60,6 +62,13 @@ const StyledWrapper = styled(Row)`
             }
         }
     }
+    .register__button {
+        padding-bottom: 1.125em;
+        padding-left: 2em;
+        padding-right: 2em;
+        padding-top: 1.125em;
+        margin-left: 0;
+    }
 `;
 
 const renderProjectCard = ({ item, index }) => {
@@ -93,6 +102,9 @@ const ProjectsSection = () => {
                         return renderProjectCard({ item, index });
                     })}
                 </div>
+                <a href={githubLink || '/'} className="btn register__button">
+                    {'Browse more on GitHub'}
+                </a>
             </Col>
         </StyledWrapper>
     );
