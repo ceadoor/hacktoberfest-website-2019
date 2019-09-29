@@ -27,6 +27,13 @@ module.exports = {
     heroDetails: {
         desc:
             'Hacktoberfest® is open to everyone in our global community. Whether you’re a developer, student learning to code, event host, or company of any size, you can help drive growth of open source and make positive contributions to an ever-growing community. All backgrounds and skill levels are encouraged to complete the challenge.',
+        ref: {
+            text: 'Read more about',
+            button: {
+                text: 'the event here.',
+                url: '/details',
+            },
+        },
         list: [
             'Hacktoberfest is open to everyone in our global community!',
             'Pull requests can be made in any GitHub-hosted repositories/projects.',
@@ -39,7 +46,7 @@ module.exports = {
         ref: {
             text: 'Read more about',
             button: {
-                text: 'participation details.',
+                text: 'event rules.',
                 url: '/details',
             },
         },

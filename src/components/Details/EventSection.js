@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { homeSession } from '../../config';
 
 const StyledWrapper = styled(Row)`
+    margin-top: 50px;
     margin-bottom: 130px;
     .subtext {
         margin: 24px 0px 24px 0px;

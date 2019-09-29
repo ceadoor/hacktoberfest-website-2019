@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 
 import EventSection from './EventSection';
+import DetailsSection from './DetailsSection';
 
 const Details = () => {
     return (
@@ -12,6 +13,7 @@ const Details = () => {
         >
             <Container>
                 <EventSection />
+                <DetailsSection />
             </Container>
         </section>
     );
