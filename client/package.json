@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "author": "abhijithvijayan",
+  "proxy": "http://localhost:3001/",
   "scripts": {
     "dev": "react-scripts start",
     "build": "react-scripts build"
