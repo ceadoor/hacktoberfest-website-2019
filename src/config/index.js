@@ -42,7 +42,7 @@ module.exports = {
     },
     heroRules: {
         desc:
-            'To qualify for the official limited edition Hacktoberfest shirt, you must register and make four pull requests (PRs) between October 1-31 (in any time zone). PRs can be made to any public repo on GitHub, not only the ones with issues labeled Hacktoberfest. If a maintainer reports your pull request as spam or behavior not in line with the project’s code of conduct, you will be ineligible to participate. This year, the first 50,000 participants who successfully complete the challenge will earn a T-shirt.',
+            'To qualify for the official limited edition Hacktoberfest shirt, you must register and make four pull requests (PRs) between October 1-31 (in any time zone). PRs can be made to any public repo on GitHub, not only the ones with issues labeled Hacktoberfest. If a maintainer reports your pull request as spam or behavior not in line with the project’s code of conduct, you will be ineligible to participate. This year, the first40,000 participants who successfully complete the challenge will earn a T-shirt.',
         ref: {
             text: 'Read more about',
             button: {
@@ -79,7 +79,7 @@ module.exports = {
                 language: 'JavaScript',
             },
             {
-                name: 'Project 5',
+                name: 'Project4',
                 desc: 'Not yet ready for PR',
                 url: 'https://github.com/ceadoor',
                 language: 'JavaScript',
@@ -118,12 +118,11 @@ module.exports = {
         ],
     },
 
-    domain: '',
-    twitterShare: '',
+    domain: 'https://hacktoberfest-tracecea.surge.sh/',
+    twitterShare: 'https://bit.ly/2mt20Gi',
     githubLink: 'https://github.com/ceadoor',
     instagramLink: 'https://instagram.com/tracecea',
-    slackLink:
-        'https://ceadoor.slack.com/join/shared_invite/enQtNDIwNzUxNDgyMjc4LWFkZDhiNzYxOWI4OWY5OGQ2NDY0NzY4NGU5OTUxMDlkNjQxOTI3MWFjNWM3ZWJhOWRhYzcxY2FlMDk5OGQwNjg',
+    slackLink: 'https://kutt.it/trace-slack',
 
     /**
      *  DETAILS PAGE
@@ -137,7 +136,7 @@ module.exports = {
             {
                 id: '03',
                 title: 'How',
-                sub: 'Make 5 pull requests to GitHub-hosted repositories.',
+                sub: 'Make 4 pull requests to GitHub-hosted repositories.',
             },
             { id: '04', title: 'When', sub: 'Exact date to be declared soon' },
         ],
