@@ -1,0 +1,6 @@
+{
+  "verbose": false,
+  "ignore": [],
+  "watch": ["../server/**/*"],
+  "ext": "js json"
+}

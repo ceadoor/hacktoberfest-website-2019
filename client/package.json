@@ -1,0 +1,45 @@
+{
+  "name": "@hacktoberfest/client",
+  "version": "1.0.0",
+  "private": true,
+  "author": "abhijithvijayan",
+  "scripts": {
+    "dev": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "html-react-parser": "^0.9.1",
+    "node-sass": "^4.12.0",
+    "react": "^16.9.0",
+    "react-bootstrap": "^1.0.0-beta.12",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.1.0",
+    "react-scripts": "3.1.1",
+    "react-tilt": "^0.1.4",
+    "styled-components": "^4.4.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "sass-extract": "^2.1.0",
+    "sass-extract-js": "^0.4.0",
+    "sass-extract-loader": "^1.1.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "onepass"
+    ]
+  }
+}
