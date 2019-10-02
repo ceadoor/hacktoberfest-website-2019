@@ -135,3 +135,45 @@ exports.fetchPRsData = async ({ username, octokit }) => {
         fetchedAt: new Date().toJSON(),
     };
 };
+
+const loadRepos = async ({ octokit }) => {
+    let list = [];
+    try {
+        list = await octokit.search.issuesAndPullRequests({
+            q: 'label:hacktoberfest+state:open',
+            per_page: 100,
+        });
+        // eslint-disable-next-line no-empty
+    } catch (err) {}
+    list = await octokit.paginate(list);
+    return list;
+};
+
+const parseRepos = list => {
+    return _.map(list, item => {
+        const repo = item.repository_url.split('/');
+        const repoName = repo[repo.length - 1];
+        const { number, state, title, html_url, user, created_at } = item;
+        return {
+            title,
+            number,
+            repoName,
+            user: {
+                login: user.login,
+                url: user.html_url,
+            },
+            url: html_url,
+            open: state === 'open',
+            createdAt: moment(created_at).format('MMMM Do YYYY'),
+        };
+    });
+};
+
+exports.fetchGetHacktoberfestRepos = async ({ octokit }) => {
+    const list = await loadRepos({ octokit });
+    const parsedRepoList = await parseRepos(list);
+    return {
+        data: parsedRepoList,
+        fetchedAt: new Date().toJSON(),
+    };
+};
