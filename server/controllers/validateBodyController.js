@@ -15,6 +15,10 @@ exports.signUpValidationCriterias = [
         .body('name')
         .exists()
         .withMessage('You must provide your name.'),
+    validator
+        .body('username')
+        .exists()
+        .withMessage('You must provide your username.'),    
 ];
 
 exports.signUpValidationBody = (req, res, next) => {
@@ -23,9 +27,10 @@ exports.signUpValidationBody = (req, res, next) => {
         const errorsObj = errors.mapped();
         const emailError = errorsObj.email && errorsObj.email.msg;
         const nameError = errorsObj.name && errorsObj.name.msg;
+        const usernameError = errorsObj.username && errorsObj.username.msg;
         return res.status(400).json({
             error: {
-                msg: emailError || nameError,
+                msg: emailError || nameError || usernameError,
                 _reported: new Date().getTime(),
             },
         });
