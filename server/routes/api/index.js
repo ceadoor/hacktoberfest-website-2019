@@ -11,3 +11,10 @@ exports.fetchGitHubData = async (req, res) => {
 
     res.status(200).json({ data, fetchedAt });
 };
+
+exports.fetchGetHacktoberfestRepos = async (req, res) => {
+    const octokit = req.app.get('octokit');
+    const { data, fetchedAt } = await app.fetchGetHacktoberfestRepos({ octokit });
+
+    res.status(200).json({ data, fetchedAt });
+};
