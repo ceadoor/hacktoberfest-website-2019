@@ -1,4 +1,5 @@
 const path = require('path');
+const cors = require('cors');
 const morgan = require('morgan');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -18,6 +19,13 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 // Logger
 if (dev) {
     app.use(morgan('dev'));
+} else {
+    // Set up CORS only in production
+    const corsOptions = {
+        origin: process.env.REACT_APP_HOSTNAME,
+    };
+
+    app.use(cors(corsOptions));
 }
 
 app.use(cookieParser());
