@@ -7,10 +7,10 @@ require('dotenv').config({ path: 'variables.env' });
 const app = require('./app');
 const { setUpOctokitAPI } = require('./routes/api/github');
 
-const githubApi = setUpOctokitAPI();
+const octokitApi = setUpOctokitAPI();
 
 app.set('port', process.env.PORT || 3001);
-app.set('github', githubApi);
+app.set('octokit', octokitApi);
 
 const server = app.listen(app.get('port'), () => {
     console.log(`Express running → PORT ${server.address().port}`);
