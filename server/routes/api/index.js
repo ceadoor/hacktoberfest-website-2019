@@ -7,8 +7,7 @@ exports.sendStatus = (req, res) => {
 exports.fetchGitHubData = async (req, res) => {
     const octokit = req.app.get('octokit');
     const { username } = req.body;
+    const { data, fetchedAt } = await app.fetchPRsData({ username, octokit });
 
-    const { data } = await app.fetchPRsData({ octokit, username });
-
-    res.status(200).json({ data });
+    res.status(200).json({ data, fetchedAt });
 };
