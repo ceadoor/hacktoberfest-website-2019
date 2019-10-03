@@ -12,8 +12,9 @@ exports.fetchUserHacktoberfestPRs = async (req, res) => {
     const octokit = req.app.get('octokit');
     const { username } = req.body;
     const { data, fetchedAt } = await app.getUserPRs({ username, octokit });
+    const { user } = await app.getUserDetails({ username, octokit });
 
-    res.status(200).json({ data, fetchedAt });
+    res.status(200).json({ data, user, fetchedAt });
 };
 
 /**

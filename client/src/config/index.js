@@ -16,7 +16,7 @@ module.exports = {
 
     registerButton: {
         name: 'Start Hacking',
-        url: '/register',
+        url: '/progress',
     },
 
     /**

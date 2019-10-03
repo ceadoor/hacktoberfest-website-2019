@@ -1,20 +1,16 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 
-import FormSection from './FormSection';
-
-const Progress = () => {
+const Projects = () => {
     return (
         <section
             style={{
                 padding: '30px auto',
             }}
         >
-            <Container>
-                <FormSection />
-            </Container>
+            <Container>Projects section</Container>
         </section>
     );
 };
 
-export default Progress;
+export default Projects;

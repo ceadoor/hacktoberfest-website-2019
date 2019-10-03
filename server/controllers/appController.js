@@ -170,3 +170,18 @@ exports.getHacktoberfestRepos = async ({ page, perPage, octokit }) => {
         fetchedAt: new Date().toJSON(),
     };
 };
+
+exports.getUserDetails = async ({ username, octokit }) => {
+    const {
+        data: { avatar_url },
+    } = await octokit.users.getByUsername({
+        username,
+    });
+
+    return {
+        user: {
+            userImage: avatar_url,
+            username,
+        },
+    };
+};

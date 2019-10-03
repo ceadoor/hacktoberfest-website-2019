@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import axios from '../../api';
-import { GET_REPOS } from '../../api/constants';
-import { githubLink } from '../../config';
+import { GET_HACKTOBERFEST_REPOS_ENDPOINT } from '../../api/constants';
 
 const StyledWrapper = styled(Row)`
     margin-bottom: 130px;
@@ -107,7 +107,7 @@ class ProjectsSection extends Component {
     }
 
     fetchRepos = async () => {
-        const reposList = await axios.get(GET_REPOS, { page: 1, perPage: 10 });
+        const reposList = await axios.get(GET_HACKTOBERFEST_REPOS_ENDPOINT, { page: 1, perPage: 10 });
         this.setState({
             repos: reposList.data.data.slice(0, 6),
         });
@@ -124,9 +124,9 @@ class ProjectsSection extends Component {
                             return renderProjectCard({ item, index });
                         })}
                     </div>
-                    <a href={githubLink || '/'} className="btn register__button">
+                    <Link to="/projects" className="btn register__button">
                         Browse more on GitHub
-                    </a>
+                    </Link>
                 </Col>
             </StyledWrapper>
         );
