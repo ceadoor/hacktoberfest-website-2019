@@ -164,7 +164,7 @@ const parseRepos = list => {
 
 exports.getHacktoberfestRepos = async ({ octokit }) => {
     const list = await loadRepos({ octokit });
-    const parsedRepoList = await parseRepos(list);
+    const parsedRepoList = parseRepos(list);
     return {
         data: parsedRepoList,
         fetchedAt: new Date().toJSON(),
