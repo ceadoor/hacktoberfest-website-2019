@@ -3,6 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import { heroProjects } from '../../config';
 import api from '../../api';
 import * as endpoints from '../../api/constants';
 
@@ -124,8 +125,9 @@ class ProjectsSection extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: 'You can contribute to any project on GitHub. Here are a few prepared for you:',
+            text: heroProjects.text,
             repos: [],
+            loading: true,
         };
     }
 
@@ -134,9 +136,14 @@ class ProjectsSection extends Component {
     }
 
     fetchRepos = async () => {
-        const reposList = await api.post(endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT, { page: 1, perPage: 6 });
+        const reposList = await api({
+            method: 'POST',
+            url: endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT,
+            data: { page: 1, perPage: 6 },
+        });
         this.setState({
             repos: reposList.data.data,
+            loading: false,
         });
     };
 
@@ -151,9 +158,13 @@ class ProjectsSection extends Component {
                             return renderProjectCard({ item, index });
                         })}
                     </div>
-                    <Link to="/projects" className="btn button__main">
-                        Browse more
-                    </Link>
+                    {this.state.loading ? (
+                        <h2>Loading...</h2>
+                    ) : (
+                        <Link to="/projects" className="btn button__main">
+                            Browse more
+                        </Link>
+                    )}
                 </Col>
             </StyledWrapper>
         );
