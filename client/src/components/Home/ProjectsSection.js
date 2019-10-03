@@ -65,7 +65,7 @@ const StyledWrapper = styled(Row)`
             }
         }
     }
-    .register__button {
+    .button__main {
         padding-bottom: 1.125em;
         padding-left: 2em;
         padding-right: 2em;
@@ -124,7 +124,7 @@ class ProjectsSection extends Component {
                             return renderProjectCard({ item, index });
                         })}
                     </div>
-                    <Link to="/projects" className="btn register__button">
+                    <Link to="/projects" className="btn button__main">
                         Browse more
                     </Link>
                 </Col>

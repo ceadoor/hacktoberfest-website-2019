@@ -37,7 +37,7 @@ const StyledNavbar = styled(Navbar)`
         .navbar-nav {
             flex-direction: column;
             .nav-link,
-            .register__button {
+            .button__main {
                 margin-left: 1rem;
             }
         }
@@ -60,7 +60,7 @@ const Header = () => {
                 })}
                 <Link
                     to={registerButton.url || '/'}
-                    className="btn register__button"
+                    className="btn button__main"
                     style={{ textTransform: 'uppercase' }}
                 >
                     {registerButton.name || 'Register'}

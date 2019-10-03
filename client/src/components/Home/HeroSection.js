@@ -73,7 +73,7 @@ const HeroSection = () => {
             <Col md={5}>
                 <div className="hero__body">
                     <h1>{parse(heroText)}</h1>
-                    <Link to={registerButton.url || '/'} className="btn register__button">
+                    <Link to={registerButton.url || '/'} className="btn button__main">
                         {registerButton.name || 'Register'}
                     </Link>
                 </div>
