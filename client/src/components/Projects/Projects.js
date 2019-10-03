@@ -98,6 +98,9 @@ class Projects extends Component {
     };
 
     loadMore = async () => {
+        this.setState({
+            loading: true,
+        });
         const reposList = await api.post(endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT, {
             // eslint-disable-next-line react/no-access-state-in-setstate
             page: this.state.page,
@@ -108,6 +111,7 @@ class Projects extends Component {
             repos: [...this.state.repos, ...reposList.data.data],
             // eslint-disable-next-line react/no-access-state-in-setstate
             page: this.state.page + 1,
+            loading: false,
         });
     };
 
@@ -123,6 +127,7 @@ class Projects extends Component {
                                 return renderProjectCard({ item, index });
                             })}
                         </div>
+                        {this.state.loading && <h2>loading</h2>}
                         {!this.state.loading && (
                             <button className="register__button" type="button" onClick={this.loadMore}>
                                 More
