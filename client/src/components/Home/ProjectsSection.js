@@ -97,7 +97,7 @@ class ProjectsSection extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: '',
+            text: 'You can contribute to any project on GitHub. Here are a few prepared for you:',
             repos: [],
         };
     }
