@@ -107,9 +107,9 @@ class ProjectsSection extends Component {
     }
 
     fetchRepos = async () => {
-        const reposList = await api.get(endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT, { page: 1, perPage: 10 });
+        const reposList = await api.post(endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT, { page: 1, perPage: 9 });
         this.setState({
-            repos: reposList.data.data.slice(0, 6),
+            repos: reposList.data.data,
         });
     };
 
@@ -125,7 +125,7 @@ class ProjectsSection extends Component {
                         })}
                     </div>
                     <Link to="/projects" className="btn register__button">
-                        Browse more on GitHub
+                        Browse more
                     </Link>
                 </Col>
             </StyledWrapper>
