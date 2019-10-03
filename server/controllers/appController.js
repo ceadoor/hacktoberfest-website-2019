@@ -125,16 +125,16 @@ exports.getUserPRs = async ({ username, octokit }) => {
     };
 };
 
-const loadRepos = async ({ octokit }) => {
+const loadRepos = async ({ page, perPage, octokit }) => {
     let list = [];
     try {
         list = await octokit.search.issuesAndPullRequests({
             q: 'label:hacktoberfest+state:open',
-            per_page: 100,
+            page,
+            per_page: perPage,
         });
         // eslint-disable-next-line no-empty
     } catch (err) {}
-    list = await octokit.paginate(list);
     return list;
 };
 
@@ -162,9 +162,9 @@ const parseRepos = list => {
  *  Fetch Hacktoberfest Labelled Repos
  */
 
-exports.getHacktoberfestRepos = async ({ octokit }) => {
-    const list = await loadRepos({ octokit });
-    const parsedRepoList = await parseRepos(list);
+exports.getHacktoberfestRepos = async ({ page, perPage, octokit }) => {
+    const list = await loadRepos({ page, perPage, octokit });
+    const parsedRepoList = parseRepos(list.data.items);
     return {
         data: parsedRepoList,
         fetchedAt: new Date().toJSON(),
