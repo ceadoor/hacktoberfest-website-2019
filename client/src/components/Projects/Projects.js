@@ -7,6 +7,7 @@ import api from '../../api';
 import * as endpoints from '../../api/constants';
 
 const StyledWrapper = styled(Row)`
+    margin-bottom: 130px;
     .subhead {
         padding-top: 50px;
         padding-bottom: 50px;
@@ -62,7 +63,10 @@ const StyledWrapper = styled(Row)`
             }
         }
     }
-    .register__button {
+    h2 {
+        text-align: center;
+    }
+    .button__main {
         padding-bottom: 1.125em;
         padding-left: 2em;
         padding-right: 2em;
@@ -127,11 +131,13 @@ class Projects extends Component {
                                 return renderProjectCard({ item, index });
                             })}
                         </div>
-                        {this.state.loading && <h2>loading</h2>}
+                        {this.state.loading && <h2>Loading...</h2>}
                         {!this.state.loading && (
-                            <button className="register__button" type="button" onClick={this.loadMore}>
-                                More
-                            </button>
+                            <div className="text-center">
+                                <button className="btn button__main" type="button" onClick={this.loadMore}>
+                                    Load More
+                                </button>
+                            </div>
                         )}
                     </Col>
                 </Container>
