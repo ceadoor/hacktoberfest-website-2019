@@ -130,12 +130,12 @@ const loadRepos = async ({ octokit }) => {
     try {
         list = await octokit.search.issuesAndPullRequests({
             q: 'label:hacktoberfest+state:open',
-            per_page: 100,
+            page: 1,
+            per_page: 10,
         });
         // eslint-disable-next-line no-empty
     } catch (err) {}
-    list = await octokit.paginate(list);
-    return list;
+    return list.data.items;
 };
 
 const parseRepos = list => {
