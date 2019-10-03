@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Form, FormControl, Col, InputGroup, Button } from 'react-bootstrap';
+import { Form, Col, InputGroup, Button } from 'react-bootstrap';
+
+import api from '../../api';
+import * as endpoints from '../../api/constants';
 
 const ProgressForm = () => {
     const [validated, setValidated] = useState(false);
@@ -12,6 +15,12 @@ const ProgressForm = () => {
         }
 
         setValidated(true);
+
+        // Send POST request
+        api({
+            type: 'POST',
+            url: endpoints.GET_PULL_REQUESTS_ENDPOINT,
+        });
     };
 
     return (
