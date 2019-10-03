@@ -52,7 +52,7 @@ module.exports = {
         },
     },
     heroProjects: {
-        text: 'You can contribute to any project on GitHub. Here are a few prepared for you:',
+        text: 'You can contribute to any project on GitHub. Here are a few available for you:',
         projects: [
             {
                 name: 'Project 1',
