@@ -13,12 +13,17 @@ router.get('/api/v1/', api.sendStatus);
 
 router.post(
     '/api/v1/getPullRequestsData',
-    validate.fetchPRsValidation,
-    validate.fetchPRsValidationBody,
+    validate.fetchPRsCriterias,
+    validate.fetchPRsBody,
     catchErrors(api.fetchUserHacktoberfestPRs)
 );
 
-router.post('/api/v1/getHacktoberfestRepos', catchErrors(api.fetchHacktoberfestRepos));
+router.post(
+    '/api/v1/getHacktoberfestRepos',
+    validate.fetchReposCriterias,
+    validate.fetchReposBody,
+    catchErrors(api.fetchHacktoberfestRepos)
+);
 
 if (process.env.NODE_ENV === 'production') {
     // Handles any requests that don't match the ones above
