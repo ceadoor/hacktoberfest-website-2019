@@ -1,8 +1,9 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import { heroProjects, githubLink } from '../../config';
+import { heroProjects } from '../../config';
 
 const StyledWrapper = styled(Row)`
     margin-bottom: 130px;
@@ -102,9 +103,9 @@ const ProjectsSection = () => {
                         return renderProjectCard({ item, index });
                     })}
                 </div>
-                <a href={githubLink || '/'} className="btn register__button">
-                    {'Browse more on GitHub'}
-                </a>
+                <Link to="/projects" className="btn register__button">
+                    Browse more on GitHub
+                </Link>
             </Col>
         </StyledWrapper>
     );

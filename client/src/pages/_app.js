@@ -10,6 +10,7 @@ import '../styles/main.scss';
 import Home from './index';
 import Details from './details';
 import Progress from './progress';
+import Projects from './projects';
 import NotFound from './not-found';
 
 // eslint-disable-next-line import/no-unresolved, import/no-webpack-loader-syntax
@@ -25,6 +26,7 @@ const ReactApp = () => {
                         <Route path="/" exact component={Home} />
                         <Route path="/details" exact component={Details} />
                         <Route path="/progress" exact component={Progress} />
+                        <Route path="/projects" exact component={Projects} />
                         <Route path="" component={NotFound} />
                     </Switch>
                 </Router>
