@@ -1,14 +1,14 @@
 const validator = require('express-validator');
 const { validationResult } = require('express-validator');
 
-exports.fetchHacktoberfestReposValidation = [
+exports.fetchPRsValidation = [
     validator
         .body('username')
         .exists()
-        .withMessage('You must provide your username.'),    
+        .withMessage('You must provide your username.'),
 ];
 
-exports.HacktoberfestReposValidationBody = (req, res, next) => {
+exports.fetchPRsValidationBody = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         const errorsObj = errors.mapped();

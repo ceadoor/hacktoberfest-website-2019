@@ -3,14 +3,20 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const { catchErrors } = require('../handlers/errorHandlers');
-const appController = require('../controllers/appController');
+const app = require('../controllers/appController');
+const validate = require('../controllers/validateBodyController');
 const api = require('./api');
 
-router.get('/', appController.getIndex);
+router.get('/', app.getIndex);
 
 router.get('/api/v1/', api.sendStatus);
 
-router.post('/api/v1/getPullRequestsData', catchErrors(api.fetchUserHacktoberfestPRs));
+router.post(
+    '/api/v1/getPullRequestsData',
+    validate.fetchPRsValidation,
+    validate.fetchPRsValidationBody,
+    catchErrors(api.fetchUserHacktoberfestPRs)
+);
 
 router.get('/api/v1/getHacktoberfestRepos', catchErrors(api.fetchHacktoberfestRepos));
 
