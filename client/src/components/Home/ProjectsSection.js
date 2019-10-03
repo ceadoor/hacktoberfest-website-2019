@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { heroProjects } from '../../config';
+import api from '../../api';
+import * as endpoints from '../../api/constants';
 
 const StyledWrapper = styled(Row)`
     margin-bottom: 130px;
@@ -42,6 +43,7 @@ const StyledWrapper = styled(Row)`
                 margin-right: 0;
                 margin-top: 0;
                 width: 100%;
+                min-height: 230px;
                 padding: 1.25rem;
                 background-color: ${({ theme }) => {
                     return theme.darkPink;
@@ -51,11 +53,11 @@ const StyledWrapper = styled(Row)`
                     transform: scale(1.04, 1.04);
                 }
                 h3 {
-                    margin-top: 10px;
                     font-size: 1rem;
                 }
                 p {
-                    margin: 20px 0 60px 0;
+                    flex-grow: 1;
+                    margin: 20px 0 0px 0;
                     color: ${({ theme }) => {
                         return theme.lightBluishWhite;
                     }};
@@ -73,17 +75,17 @@ const StyledWrapper = styled(Row)`
 `;
 
 const renderProjectCard = ({ item, index }) => {
-    const { name, desc, url, language } = item;
+    const { repoName, title, user, url } = item;
     return (
         <React.Fragment key={index}>
             <a href={url} target="nofollow noopener noreferrer">
                 <div className="project__card">
                     <div className="project__title">
-                        <h3>{name}</h3>
+                        <h3>{repoName}</h3>
                     </div>
-                    <p>{desc}</p>
+                    <p>{title}</p>
                     <div>
-                        <h3>{language}</h3>
+                        <h3 className="author">{user.login}</h3>
                     </div>
                 </div>
             </a>
@@ -91,24 +93,44 @@ const renderProjectCard = ({ item, index }) => {
     );
 };
 
-const ProjectsSection = () => {
-    const { text, projects } = heroProjects;
-    return (
-        <StyledWrapper>
-            <Col md={12}>
-                <h2 className="subhead">Hacktoberfest projects</h2>
-                <p className="subtext">{text}</p>
-                <div className="projects__grid">
-                    {projects.map((item, index) => {
-                        return renderProjectCard({ item, index });
-                    })}
-                </div>
-                <Link to="/projects" className="btn register__button">
-                    Browse more on GitHub
-                </Link>
-            </Col>
-        </StyledWrapper>
-    );
-};
+class ProjectsSection extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            text: '',
+            repos: [],
+        };
+    }
+
+    componentDidMount() {
+        this.fetchRepos();
+    }
+
+    fetchRepos = async () => {
+        const reposList = await api.get(endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT, { page: 1, perPage: 10 });
+        this.setState({
+            repos: reposList.data.data.slice(0, 6),
+        });
+    };
+
+    render() {
+        return (
+            <StyledWrapper>
+                <Col md={12}>
+                    <h2 className="subhead">Hacktoberfest projects</h2>
+                    <p className="subtext">{this.state.text}</p>
+                    <div className="projects__grid">
+                        {this.state.repos.map((item, index) => {
+                            return renderProjectCard({ item, index });
+                        })}
+                    </div>
+                    <Link to="/projects" className="btn register__button">
+                        Browse more on GitHub
+                    </Link>
+                </Col>
+            </StyledWrapper>
+        );
+    }
+}
 
 export default ProjectsSection;
