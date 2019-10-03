@@ -1,6 +1,8 @@
+/* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
+
 import { renderProjectCard } from '../Home/ProjectsSection';
 
 import api from '../../api';
@@ -86,34 +88,31 @@ class Projects extends Component {
     }
 
     async componentDidMount() {
-        await this.fetchRepos();
+        const reposList = await this.fetchRepos({ page: 1 });
         this.setState({
+            repos: reposList.data.data,
+            page: this.state.page + 1,
             loading: false,
         });
     }
 
-    fetchRepos = async () => {
-        const reposList = await api.post(endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT, { page: 1, perPage: 9 });
-        this.setState({
-            repos: reposList.data.data,
-            // eslint-disable-next-line react/no-access-state-in-setstate
-            page: this.state.page + 1,
+    // The API fetch function
+    fetchRepos = async ({ page }) => {
+        const reposList = await api({
+            url: endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT,
+            method: 'POST',
+            data: { page, perPage: 9 },
         });
+        return reposList;
     };
 
     loadMore = async () => {
         this.setState({
             loading: true,
         });
-        const reposList = await api.post(endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT, {
-            // eslint-disable-next-line react/no-access-state-in-setstate
-            page: this.state.page,
-            perPage: 9,
-        });
+        const reposList = await this.fetchRepos({ page: this.state.page });
         this.setState({
-            // eslint-disable-next-line react/no-access-state-in-setstate
             repos: [...this.state.repos, ...reposList.data.data],
-            // eslint-disable-next-line react/no-access-state-in-setstate
             page: this.state.page + 1,
             loading: false,
         });
