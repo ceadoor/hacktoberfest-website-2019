@@ -107,7 +107,7 @@ class ProjectsSection extends Component {
     }
 
     fetchRepos = async () => {
-        const reposList = await api.post(endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT, { page: 1, perPage: 9 });
+        const reposList = await api.post(endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT, { page: 1, perPage: 6 });
         this.setState({
             repos: reposList.data.data,
         });
