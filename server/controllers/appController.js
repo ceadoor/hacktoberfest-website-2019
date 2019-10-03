@@ -174,16 +174,31 @@ exports.getHacktoberfestRepos = async ({ page, perPage, octokit }) => {
 };
 
 exports.getUserDetails = async ({ username, octokit }) => {
-    const {
-        data: { avatar_url },
-    } = await octokit.users.getByUsername({
-        username,
-    });
-
-    return {
-        user: {
-            userImage: avatar_url,
+    let userExists = true;
+    let avatar_url;
+    try {
+        ({
+            data: { avatar_url },
+        } = await octokit.users.getByUsername({
             username,
-        },
+        }));
+    } catch (err) {
+        // status if not merged
+        if (err.status === 404) {
+            userExists = false;
+        }
+    }
+    if (userExists) {
+        return {
+            user: {
+                userImage: avatar_url,
+                username,
+            },
+            userExists,
+        };
+    }
+    return {
+        error: "Couldn't find any data or we hit an error, try again ?",
+        userExists,
     };
 };
