@@ -138,7 +138,7 @@ const loadRepos = async ({ page, perPage, octokit }) => {
     return list;
 };
 
-const parseRepos = list => {
+const parseRepos = ({ list }) => {
     return _.map(list, item => {
         const repo = item.repository_url.split('/');
         const repoName = repo[repo.length - 1];
@@ -163,8 +163,10 @@ const parseRepos = list => {
  */
 
 exports.getHacktoberfestRepos = async ({ page, perPage, octokit }) => {
-    const list = await loadRepos({ page, perPage, octokit });
-    const parsedRepoList = parseRepos(list.data.items);
+    const {
+        data: { items = [] },
+    } = await loadRepos({ page, perPage, octokit });
+    const parsedRepoList = parseRepos({ list: items });
     return {
         data: parsedRepoList,
         fetchedAt: new Date().toJSON(),
