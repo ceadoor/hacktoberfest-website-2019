@@ -22,7 +22,8 @@ exports.fetchUserHacktoberfestPRs = async (req, res) => {
 
 exports.fetchHacktoberfestRepos = async (req, res) => {
     const octokit = req.app.get('octokit');
-    const { data, fetchedAt } = await app.getHacktoberfestRepos({ octokit });
+    const { page, perPage } = req.body;
+    const { data, fetchedAt } = await app.getHacktoberfestRepos({ page, perPage, octokit });
 
     res.status(200).json({ data, fetchedAt });
 };
