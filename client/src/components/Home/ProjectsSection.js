@@ -74,7 +74,7 @@ const StyledWrapper = styled(Row)`
     }
 `;
 
-const renderProjectCard = ({ item, index }) => {
+export const renderProjectCard = ({ item, index }) => {
     const { repoName, title, user, url } = item;
     return (
         <React.Fragment key={index}>
@@ -97,7 +97,7 @@ class ProjectsSection extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: '',
+            text: 'You can contribute to any project on GitHub. Here are a few prepared for you:',
             repos: [],
         };
     }

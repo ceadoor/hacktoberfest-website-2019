@@ -18,7 +18,7 @@ router.post(
     catchErrors(api.fetchUserHacktoberfestPRs)
 );
 
-router.get('/api/v1/getHacktoberfestRepos', catchErrors(api.fetchHacktoberfestRepos));
+router.post('/api/v1/getHacktoberfestRepos', catchErrors(api.fetchHacktoberfestRepos));
 
 if (process.env.NODE_ENV === 'production') {
     // Handles any requests that don't match the ones above
