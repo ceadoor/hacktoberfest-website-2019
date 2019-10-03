@@ -138,15 +138,19 @@ const loadRepos = async ({ page, perPage, octokit }) => {
     return list;
 };
 
-const parseRepos = ({ list }) => {
-    return _.map(list, item => {
+const parseRepos = ({ list, octokit }) => {
+    const listData = _.map(list, async item => {
         const repo = item.repository_url.split('/');
         const repoName = repo[repo.length - 1];
+        const owner = repo[repo.length - 2];
         const { number, state, title, html_url, user, created_at } = item;
+        const info = await octokit.repos.get({ owner, repo: repoName });
         return {
-            title,
+            issueTitle: title,
             number,
             repoName,
+            description: info.data.description,
+            language: info.data.language,
             user: {
                 login: user.login,
                 url: user.html_url,
@@ -156,6 +160,7 @@ const parseRepos = ({ list }) => {
             createdAt: moment(created_at).format('MMMM Do YYYY'),
         };
     });
+    return Promise.all(listData);
 };
 
 /**
@@ -166,7 +171,7 @@ exports.getHacktoberfestRepos = async ({ page, perPage, octokit }) => {
     const {
         data: { items = [] },
     } = await loadRepos({ page, perPage, octokit });
-    const parsedRepoList = parseRepos({ list: items });
+    const parsedRepoList = await parseRepos({ list: items, octokit });
     return {
         data: parsedRepoList,
         fetchedAt: new Date().toJSON(),

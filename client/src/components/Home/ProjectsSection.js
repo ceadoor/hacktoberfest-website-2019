@@ -30,7 +30,7 @@ const StyledWrapper = styled(Row)`
 
         a {
             color: ${({ theme }) => {
-                return theme.lightWhite;
+                return theme.white;
             }};
             .project__card {
                 transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
@@ -53,7 +53,15 @@ const StyledWrapper = styled(Row)`
                     transform: scale(1.04, 1.04);
                 }
                 h3 {
-                    font-size: 1rem;
+                    font-size: 0.8rem;
+                }
+                h2 {
+                    padding-top: 0px;
+                    font-size: 0.9rem;
+                    text-align: right;
+                    color: ${({ theme }) => {
+                        return theme.lightWhite;
+                    }};
                 }
                 p {
                     flex-grow: 1;
@@ -61,6 +69,17 @@ const StyledWrapper = styled(Row)`
                     color: ${({ theme }) => {
                         return theme.lightBluishWhite;
                     }};
+                }
+                .issue {
+                    p {
+                        font-size: 0.7rem;
+                    }
+                    .issue__span {
+                        color: white;
+                        background: #152347;
+                        padding: 2px;
+                        margin-right: 5px;
+                    }
                 }
             }
         }
@@ -75,17 +94,25 @@ const StyledWrapper = styled(Row)`
 `;
 
 export const renderProjectCard = ({ item, index }) => {
-    const { repoName, title, user, url } = item;
+    const { repoName, issueTitle, description, number, language, url } = item;
     return (
         <React.Fragment key={index}>
             <a href={url} target="nofollow noopener noreferrer">
                 <div className="project__card">
-                    <div className="project__title">
-                        <h3>{repoName}</h3>
-                    </div>
-                    <p>{title}</p>
-                    <div>
-                        <h3 className="author">{user.login}</h3>
+                    <Row>
+                        <Col className="project__title">
+                            <h3>{repoName}</h3>
+                        </Col>
+                        <Col>
+                            <h2>{language}</h2>
+                        </Col>
+                    </Row>
+                    <p>{description}</p>
+                    <div className="issue">
+                        <p>
+                            <span className="issue__span">#{number}</span>
+                            {issueTitle}
+                        </p>
                     </div>
                 </div>
             </a>
