@@ -55,7 +55,7 @@ const ProgressForm = () => {
                             required
                         />
                         <InputGroup.Append>
-                            <Button variant="outline-secondary" type="submit">
+                            <Button className="btn button__main ml-0" type="submit">
                                 Check
                             </Button>
                         </InputGroup.Append>
