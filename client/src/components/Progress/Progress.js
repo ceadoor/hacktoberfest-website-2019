@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 
+import FormSection from './FormSection';
+
 const Progress = () => {
     return (
         <section
@@ -8,7 +10,9 @@ const Progress = () => {
                 padding: '30px auto',
             }}
         >
-            <Container>Progress section</Container>
+            <Container>
+                <FormSection />
+            </Container>
         </section>
     );
 };
