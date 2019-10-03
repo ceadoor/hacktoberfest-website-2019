@@ -74,7 +74,7 @@ const StyledWrapper = styled(Row)`
     }
 `;
 
-const renderProjectCard = ({ item, index }) => {
+export const renderProjectCard = ({ item, index }) => {
     const { repoName, title, user, url } = item;
     return (
         <React.Fragment key={index}>
