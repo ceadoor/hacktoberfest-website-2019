@@ -19,14 +19,18 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 // Logger
 if (dev) {
     app.use(morgan('dev'));
-} else {
-    // Set up CORS only in production
-    const corsOptions = {
-        origin: process.env.REACT_APP_HOSTNAME,
-    };
-
-    app.use(cors(corsOptions));
 }
+// else {
+//     // Set up CORS only in production
+//     const corsOptions = {
+//         origin: process.env.REACT_APP_HOSTNAME,
+//     };
+
+//     app.use(cors(corsOptions));
+// }
+
+// Allow all domains
+app.use(cors());
 
 app.use(cookieParser());
 
