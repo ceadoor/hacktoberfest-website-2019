@@ -10,10 +10,9 @@ router.get('/', appController.getIndex);
 
 router.get('/api/v1/', api.sendStatus);
 
-// add body validator
-router.post('/api/v1/getPullRequestsData', catchErrors(api.fetchGitHubData));
+router.post('/api/v1/getPullRequestsData', catchErrors(api.fetchUserHacktoberfestPRs));
 
-router.get('/api/v1/getHacktoberfestRepos', catchErrors(api.fetchGetHacktoberfestRepos));
+router.get('/api/v1/getHacktoberfestRepos', catchErrors(api.fetchHacktoberfestRepos));
 
 if (process.env.NODE_ENV === 'production') {
     // Handles any requests that don't match the ones above

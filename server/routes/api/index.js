@@ -4,17 +4,25 @@ exports.sendStatus = (req, res) => {
     res.json({ status: 'API ok' });
 };
 
-exports.fetchGitHubData = async (req, res) => {
+/**
+ *  Progress of User
+ */
+
+exports.fetchUserHacktoberfestPRs = async (req, res) => {
     const octokit = req.app.get('octokit');
     const { username } = req.body;
-    const { data, fetchedAt } = await app.fetchPRsData({ username, octokit });
+    const { data, fetchedAt } = await app.getUserPRs({ username, octokit });
 
     res.status(200).json({ data, fetchedAt });
 };
 
-exports.fetchGetHacktoberfestRepos = async (req, res) => {
+/**
+ *  Open repos for contributing
+ */
+
+exports.fetchHacktoberfestRepos = async (req, res) => {
     const octokit = req.app.get('octokit');
-    const { data, fetchedAt } = await app.fetchGetHacktoberfestRepos({ octokit });
+    const { data, fetchedAt } = await app.getHacktoberfestRepos({ octokit });
 
     res.status(200).json({ data, fetchedAt });
 };

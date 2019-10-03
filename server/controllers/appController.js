@@ -10,9 +10,6 @@ const buildSearchQuery = (username, searchYear) => {
     return `-label:invalid+created:${searchYear}-09-30T00:00:00-12:00..${searchYear}-10-31T23:59:59-12:00+type:pr+is:public+author:${username}`;
 };
 
-/**
- *  Fetch Pull Requests
- */
 const loadPRs = async ({ username, octokit }) => {
     /**
      *  Get correct-year
@@ -44,10 +41,7 @@ const loadPRs = async ({ username, octokit }) => {
     return { list };
 };
 
-/**
- *  Parse raw data
- */
-exports.parsePRs = ({ list }) => {
+const parsePRs = ({ list }) => {
     return _.map(list, item => {
         const { pull_request, labels, number, state, title, html_url, user, created_at } = item;
 
@@ -84,7 +78,7 @@ exports.parsePRs = ({ list }) => {
  *  Returns array of status flag
  *  eg: [true, false]
  */
-exports.checkMergeStatus = async ({ list, octokit }) => {
+const checkMergeStatus = async ({ list, octokit }) => {
     const result = await Promise.all(
         _.map(list, async pr => {
             const { repoName, number } = pr;
@@ -110,19 +104,14 @@ exports.checkMergeStatus = async ({ list, octokit }) => {
     return result;
 };
 
-exports.fetchPRsData = async ({ username, octokit }) => {
-    /**
-     *  Fetch PRs
-     */
+/**
+ *  Fetch User Pull Requests Status
+ */
+
+exports.getUserPRs = async ({ username, octokit }) => {
     const { list = [] } = await loadPRs({ username, octokit });
-    /**
-     *  Parse PRs
-     */
-    const parsedPRsList = await this.parsePRs({ list });
-    /**
-     *  Fetch Merge Status
-     */
-    const mergedStatusList = await this.checkMergeStatus({ list: parsedPRsList, octokit });
+    const parsedPRsList = await parsePRs({ list });
+    const mergedStatusList = await checkMergeStatus({ list: parsedPRsList, octokit });
     /**
      *  Add `merged` status to each item
      */
@@ -169,7 +158,11 @@ const parseRepos = list => {
     });
 };
 
-exports.fetchGetHacktoberfestRepos = async ({ octokit }) => {
+/**
+ *  Fetch Hacktoberfest Labelled Repos
+ */
+
+exports.getHacktoberfestRepos = async ({ octokit }) => {
     const list = await loadRepos({ octokit });
     const parsedRepoList = await parseRepos(list);
     return {
