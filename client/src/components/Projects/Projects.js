@@ -77,11 +77,15 @@ class Projects extends Component {
         this.state = {
             page: 1,
             repos: [],
+            loading: true,
         };
     }
 
-    componentDidMount() {
-        this.fetchRepos();
+    async componentDidMount() {
+        await this.fetchRepos();
+        this.setState({
+            loading: false,
+        });
     }
 
     fetchRepos = async () => {
@@ -119,9 +123,11 @@ class Projects extends Component {
                                 return renderProjectCard({ item, index });
                             })}
                         </div>
-                        <button className="register__button" type="button" onClick={this.loadMore}>
-                            More
-                        </button>
+                        {!this.state.loading && (
+                            <button className="register__button" type="button" onClick={this.loadMore}>
+                                More
+                            </button>
+                        )}
                     </Col>
                 </Container>
             </StyledWrapper>
