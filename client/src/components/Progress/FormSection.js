@@ -6,24 +6,25 @@ import ProgressForm from './ProgressForm';
 
 const StyledWrapper = styled(Row)`
     margin-top: 50px;
-    margin-bottom: 130px;
+    margin-bottom: 50px;
     background-color: ${({ theme }) => {
         return theme.darkPink;
     }};
     .wrapper {
         padding-top: 10px;
         padding-bottom: 35px;
-    }
-    h2 {
-        padding-top: 32px;
-        text-align: center;
-    }
-    .invalid-feedback {
-        text-align: center;
-        padding-top: 4px;
-        color: ${({ theme }) => {
-            return theme.yellow;
-        }};
+        h2 {
+            padding-top: 32px;
+            text-align: center;
+            padding-bottom: 1rem;
+        }
+        .invalid-feedback {
+            text-align: center;
+            padding-top: 4px;
+            color: ${({ theme }) => {
+                return theme.yellow;
+            }};
+        }
     }
 `;
 

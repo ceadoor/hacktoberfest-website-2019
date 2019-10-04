@@ -36,6 +36,21 @@ const StyledWrapper = styled(Row)`
             }
         }
     }
+
+    .progress__holder {
+        span {
+            font-size: 3rem;
+            letter-spacing: 0.9rem;
+        }
+        .progress__number {
+            color: ${({ theme }) => {
+                return theme.yellow;
+            }};
+        }
+        p {
+            font-size: 16px;
+        }
+    }
 `;
 
 const StatsHolder = props => {
@@ -60,11 +75,11 @@ const StatsHolder = props => {
                     </div>
                 </div>
             </Col>
-            <Col md={5}>
+            <Col md={4} className="progress__holder mt-3">
                 <span>
                     <span className="progress__number">{count}</span>/{prRequiredCount}
                 </span>
-                <h4>{getResultMessage(count)}</h4>
+                <p>{getResultMessage(count)}</p>
             </Col>
         </StyledWrapper>
     );
