@@ -141,4 +141,6 @@ module.exports = {
             { id: '04', title: 'When', sub: 'Exact date to be declared soon' },
         ],
     },
+
+    prRequiredCount: 4,
 };

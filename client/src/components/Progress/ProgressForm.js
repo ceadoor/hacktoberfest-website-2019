@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Col, InputGroup, Button } from 'react-bootstrap';
 
-import api from '../../api';
-import * as endpoints from '../../api/constants';
-
-const ProgressForm = () => {
+const ProgressForm = props => {
     const [validated, setValidated] = useState(false);
     const [username, setUsername] = useState('');
+    const { fetchUserData } = props;
 
     const handleChange = event => {
         const form = event.currentTarget;
@@ -24,16 +22,8 @@ const ProgressForm = () => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             setValidated(true);
-            return;
         }
-        // Send POST request
-        api({
-            method: 'POST',
-            url: endpoints.GET_PULL_REQUESTS_ENDPOINT,
-            data: {
-                username,
-            },
-        });
+        fetchUserData(username);
     };
 
     return (

@@ -27,12 +27,13 @@ const StyledWrapper = styled(Row)`
     }
 `;
 
-const FormSection = () => {
+const FormSection = props => {
+    const { fetchUserData } = props;
     return (
         <StyledWrapper>
             <Col md={12} xs={12} className="wrapper">
                 <h2 className="subhead">Check your Progress</h2>
-                <ProgressForm />
+                <ProgressForm fetchUserData={fetchUserData} />
             </Col>
         </StyledWrapper>
     );
