@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import FormSection from './FormSection';
 import StatsHolder from './StatsHolder';
+import ListItem from './ListItem';
 
 import api from '../../api';
 import * as endpoints from '../../api/constants';
 
 const Progress = () => {
+    // ToDo: set default [] for data
     const [userData, setUserData] = useState({});
 
     const fetchUserPullRequests = async username => {
@@ -35,6 +37,14 @@ const Progress = () => {
             <Container>
                 <FormSection fetchUserData={fetchUserPullRequests} />
                 <StatsHolder userData={userData} />
+                <Row>
+                    <Col md={8}>
+                        {userData.data &&
+                            userData.data.map(item => {
+                                return <ListItem item={item} />;
+                            })}
+                    </Col>
+                </Row>
             </Container>
         </section>
     );
