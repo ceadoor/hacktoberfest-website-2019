@@ -42,6 +42,7 @@ const ProgressForm = props => {
                             type="text"
                             placeholder="Username"
                             aria-describedby="url__prepend"
+                            spellCheck="false"
                             required
                         />
                         <InputGroup.Append>
