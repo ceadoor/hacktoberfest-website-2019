@@ -3,7 +3,7 @@ import { Row, Col, Image, Container } from 'react-bootstrap';
 import styled from 'styled-components';
 import Tilt from 'react-tilt';
 
-import { domain, twitterShare, githubLink, slackLink, instagramLink } from '../../config';
+import { domain, repoLink, twitterShare, githubLink, slackLink, instagramLink } from '../../config';
 import DOC from '../../static/Hacktoberfest_19_Events_lockup_ko_600x200.png';
 import { FacebookIcon, TwitterIcon, GitHubIcon, InstagramIcon, SlackIcon } from '../Icons';
 
@@ -193,7 +193,7 @@ const Footer = () => {
                 <Row>
                     <Col md={12}>
                         <p className="footer__text">
-                            &copy; 2019 <a href={githubLink}>TRACECEA.</a> ALL RIGHTS RESERVED.
+                            &copy; 2019 <a href={repoLink}>TRACECEA.</a> ALL RIGHTS RESERVED.
                         </p>
                     </Col>
                 </Row>
