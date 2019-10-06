@@ -1,8 +1,6 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { createBrowserHistory } from 'history';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 
 // common styling
 import '../styles/main.scss';
@@ -21,14 +19,16 @@ const ReactApp = () => {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <Router history={createBrowserHistory()}>
-                    <Switch>
-                        <Route path="/" exact component={Home} />
-                        <Route path="/details" exact component={Details} />
-                        <Route path="/progress" exact component={Progress} />
-                        <Route path="/projects" exact component={Projects} />
-                        <Route path="" component={NotFound} />
-                    </Switch>
+                <Router>
+                    <div>
+                        <Switch>
+                            <Route path="/" exact component={Home} />
+                            <Route path="/details" exact component={Details} />
+                            <Route path="/progress" exact component={Progress} />
+                            <Route path="/projects" exact component={Projects} />
+                            <Route path="" component={NotFound} />
+                        </Switch>
+                    </div>
                 </Router>
             </ThemeProvider>
         </>
