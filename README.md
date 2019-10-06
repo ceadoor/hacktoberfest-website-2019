@@ -24,9 +24,9 @@ Copy `variables.env.sample` to `variables.env` in `server/` directory and update
 
 #### 🌟 Accessing GitHub API
 
-##### Generate new token
+##### Generate new tokens
 
-Goto [Personal access tokens](https://github.com/settings/tokens)
+Goto [Personal Access Tokens](https://github.com/settings/tokens)
 
 - For unauthenticated requests, the rate limit is 60 requests per
   hour.
@@ -50,7 +50,7 @@ Code released under the [MIT License](LICENSE).
 
 ## 📋 Copyrights
 
-Logos & branding:
+Logos & Branding:
 
 - © 2019 DIGITALOCEAN, LLC. ALL RIGHTS RESERVED.
 - © 2019 TRACECEA. ALL RIGHTS RESERVED.
