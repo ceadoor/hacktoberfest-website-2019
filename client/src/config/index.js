@@ -119,6 +119,7 @@ module.exports = {
     },
 
     domain: 'https://hacktoberfest-tracecea.surge.sh/',
+    repoLink: 'https://github.com/ceadoor/hacktoberfest-website-2019',
     twitterShare: 'https://bit.ly/2mt20Gi',
     githubLink: 'https://github.com/ceadoor',
     instagramLink: 'https://instagram.com/tracecea',
