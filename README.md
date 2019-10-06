@@ -1,9 +1,9 @@
 <h1 align="center">⚡️ hacktoberfest-website-2019</h1>
-<p align="center">Website for Hacktoberfest event 2019</p>
+<p align="center">Website for Hacktoberfest event 2019 hosted by TraceCEA</p>
 <p align="center">https://hacktoberfest-tracecea.surge.sh</p>
 <br>
 
-### Tech/framework used
+### 🧰 Tech / framework(s) used
 
 - Build
      - [Yarn](https://yarnpkg.com/lang/en/)
