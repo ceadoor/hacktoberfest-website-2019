@@ -11,6 +11,7 @@ import * as endpoints from '../../api/constants';
 const Progress = () => {
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(false);
+    const [isErrored, setErrored] = useState(false);
 
     const fetchUserPullRequests = async username => {
         let data = {};
@@ -24,7 +25,7 @@ const Progress = () => {
                 },
             }));
         } catch (err) {
-            // ToDo: handle no user found
+            setErrored(true);
         } finally {
             setLoading(false);
             setUserData(data);
@@ -51,6 +52,9 @@ const Progress = () => {
                                 })}
                         </Col>
                     </Row>
+                )}
+                {!loading && isErrored && (
+                    <p className="text-center">Couldn't find any data or we hit an error, try again ?</p>
                 )}
             </Container>
         </section>
