@@ -42,7 +42,7 @@ module.exports = {
     },
     heroRules: {
         desc:
-            'To qualify for the official limited edition Hacktoberfest shirt, you must register and make four pull requests (PRs) between October 1-31 (in any time zone). PRs can be made to any public repo on GitHub, not only the ones with issues labeled Hacktoberfest. If a maintainer reports your pull request as spam or behavior not in line with the project’s code of conduct, you will be ineligible to participate. This year, the first40,000 participants who successfully complete the challenge will earn a T-shirt.',
+            'To qualify for the official limited edition Hacktoberfest shirt, you must register and make four pull requests (PRs) between October 1-31 (in any time zone). PRs can be made to any public repo on GitHub, not only the ones with issues labeled Hacktoberfest. If a maintainer reports your pull request as spam or behavior not in line with the project’s code of conduct, you will be ineligible to participate. This year, the first40,000 participants whom successfully complete the challenge will earn a T-shirt.',
         ref: {
             text: 'Read more about',
             button: {
@@ -138,7 +138,7 @@ module.exports = {
                 title: 'How',
                 sub: 'Make 4 pull requests to GitHub-hosted repositories.',
             },
-            { id: '04', title: 'When', sub: '20th October 2019' },
+            { id: '04', title: 'When', sub: '10th October 2019' },
         ],
     },
 
