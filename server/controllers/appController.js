@@ -61,14 +61,14 @@ const parsePRs = ({ list }) => {
             title,
             number,
             repoName: repo.replace('https://github.com/', ''),
+            url: html_url,
             user: {
                 login: user.login,
                 url: user.html_url,
             },
-            url: html_url,
-            open: state === 'open',
-            hasHacktoberfestLabel,
             createdAt: moment(created_at).format('MMMM Do YYYY'),
+            hasHacktoberfestLabel,
+            isOpen: state === 'open',
             isPending: moment(created_at).isAfter(weekOld),
         };
     });
@@ -113,10 +113,10 @@ exports.getUserPRs = async ({ username, octokit }) => {
     const parsedPRsList = await parsePRs({ list });
     const mergedStatusList = await checkMergeStatus({ list: parsedPRsList, octokit });
     /**
-     *  Add `merged` status to each item
+     *  Add `isMerged` status to each item
      */
-    const PRs = _.zipWith(parsedPRsList, mergedStatusList, (pr, merged) => {
-        return _.assign(pr, { merged });
+    const PRs = _.zipWith(parsedPRsList, mergedStatusList, (pr, isMerged) => {
+        return _.assign(pr, { isMerged });
     });
 
     return {
@@ -147,6 +147,7 @@ const parseRepos = ({ list, octokit }) => {
         const info = await octokit.repos.get({ owner, repo: repoName });
         return {
             issueTitle: title,
+            isOpen: state === 'open',
             number,
             repoName,
             description: info.data.description,
@@ -156,7 +157,6 @@ const parseRepos = ({ list, octokit }) => {
                 url: user.html_url,
             },
             url: html_url,
-            open: state === 'open',
             createdAt: moment(created_at).format('MMMM Do YYYY'),
         };
     });
