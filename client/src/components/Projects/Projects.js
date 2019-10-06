@@ -117,12 +117,16 @@ class Projects extends Component {
 
     // The API fetch function
     fetchRepos = async ({ page }) => {
-        const reposList = await api({
-            url: endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT,
-            method: 'POST',
-            data: { page, perPage: 9 },
-        });
-        return reposList;
+        try {
+            const reposList = await api({
+                url: endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT,
+                method: 'POST',
+                data: { page, perPage: 9 },
+            });
+            return reposList;
+        } catch (err) {
+            return { data: { data: [] } };
+        }
     };
 
     loadMore = async () => {

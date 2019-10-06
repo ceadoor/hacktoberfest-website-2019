@@ -136,15 +136,19 @@ class ProjectsSection extends Component {
     }
 
     fetchRepos = async () => {
-        const reposList = await api({
-            method: 'POST',
-            url: endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT,
-            data: { page: 1, perPage: 6 },
-        });
-        this.setState({
-            repos: reposList.data.data,
-            loading: false,
-        });
+        try {
+            const reposList = await api({
+                method: 'POST',
+                url: endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT,
+                data: { page: 1, perPage: 6 },
+            });
+            this.setState({
+                repos: reposList.data.data,
+                loading: false,
+            });
+        } catch (err) {
+            this.setState({ loading: false });
+        }
     };
 
     render() {
