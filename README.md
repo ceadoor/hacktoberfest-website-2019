@@ -3,6 +3,19 @@
 <p align="center">https://hacktoberfest-tracecea.surge.sh</p>
 <br>
 
+### Tech/framework used
+
+- Build
+     - [Yarn](https://yarnpkg.com/lang/en/)
+- BackEnd
+    - [ExpressJs](https://expressjs.com/)
+    - [GitHub API](https://github.com/octokit/rest.js/)
+- FrontEnd
+    - [ReactJs](https://reactjs.org/)
+    - [React Bootstrap](https://react-bootstrap.github.io/)
+    - [React Router Dom](https://www.npmjs.com/package/react-router-dom)
+    - [Sass](https://sass-lang.com/)
+ 
 ## 🚀 Quick Start
 
 - `yarn install` to install dependencies.
