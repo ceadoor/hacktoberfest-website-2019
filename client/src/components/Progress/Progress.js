@@ -20,6 +20,7 @@ const Progress = () => {
             ({ data } = await api({
                 method: 'POST',
                 url: endpoints.GET_PULL_REQUESTS_ENDPOINT,
+                timeout: 10000,
                 data: {
                     username,
                 },

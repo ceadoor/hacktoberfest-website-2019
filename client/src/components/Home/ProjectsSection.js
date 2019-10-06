@@ -140,6 +140,7 @@ class ProjectsSection extends Component {
             const reposList = await api({
                 method: 'POST',
                 url: endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT,
+                timeout: 10000,
                 data: { page: 1, perPage: 6 },
             });
             this.setState({
