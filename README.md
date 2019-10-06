@@ -1,4 +1,4 @@
-<h1 align="center">⚡️ HacktoberFest-Website-2019</h1>
+<h1 align="center">⚡️ hacktoberfest-website-2019</h1>
 <p align="center">Website for Hacktoberfest event 2019</p>
 <p align="center">https://hacktoberfest-tracecea.surge.sh</p>
 <br>
