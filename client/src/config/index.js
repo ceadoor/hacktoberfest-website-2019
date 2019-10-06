@@ -42,7 +42,7 @@ module.exports = {
     },
     heroRules: {
         desc:
-            'To qualify for the official limited edition Hacktoberfest shirt, you must register and make four pull requests (PRs) between October 1-31 (in any time zone). PRs can be made to any public repo on GitHub, not only the ones with issues labeled Hacktoberfest. If a maintainer reports your pull request as spam or behavior not in line with the project’s code of conduct, you will be ineligible to participate. This year, the first40,000 participants whom successfully complete the challenge will earn a T-shirt.',
+            'To qualify for the official limited edition Hacktoberfest shirt, you must register and make four pull requests (PRs) between October 1-31 (in any time zone). PRs can be made to any public repo on GitHub, not only the ones with issues labeled Hacktoberfest. If a maintainer reports your pull request as spam or behavior not in line with the project’s code of conduct, you will be ineligible to participate. This year, the first 40,000 participants whom successfully complete the challenge will earn a T-shirt.',
         ref: {
             text: 'Read more about',
             button: {
@@ -53,44 +53,6 @@ module.exports = {
     },
     heroProjects: {
         text: 'You can contribute to any project on GitHub. Here are a few available for you:',
-        projects: [
-            {
-                name: 'Project 1',
-                desc: 'Not yet ready for PR',
-                url: 'https://github.com/ceadoor',
-                language: 'JavaScript',
-            },
-            {
-                name: 'Project 2',
-                desc: 'Not yet ready for PR',
-                url: 'https://github.com/ceadoor',
-                language: 'JavaScript',
-            },
-            {
-                name: 'Project 3',
-                desc: 'Not yet ready for PR',
-                url: 'https://github.com/ceadoor',
-                language: 'JavaScript',
-            },
-            {
-                name: 'Project 4',
-                desc: 'Not yet ready for PR',
-                url: 'https://github.com/ceadoor',
-                language: 'JavaScript',
-            },
-            {
-                name: 'Project4',
-                desc: 'Not yet ready for PR',
-                url: 'https://github.com/ceadoor',
-                language: 'JavaScript',
-            },
-            {
-                name: 'Project 6',
-                desc: 'Not yet ready for PR',
-                url: 'https://github.com/ceadoor',
-                language: 'JavaScript',
-            },
-        ],
     },
     homeSession: {
         text: 'Hacktoberfest is a month-long celebration of open source software.',
@@ -131,7 +93,7 @@ module.exports = {
     routeSession: {
         text: 'Celebrate and support open source technology by attending the local event.',
         session: [
-            { id: '01', title: 'Who', sub: 'Hacktoberfest is open to everyone in our global community.' },
+            { id: '01', title: 'Whom', sub: 'Hacktoberfest is open to everyone in our global community.' },
             { id: '02', title: 'Where', sub: 'College of Engineering, Adoor' },
             {
                 id: '03',
