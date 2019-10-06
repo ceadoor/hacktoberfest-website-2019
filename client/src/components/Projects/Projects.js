@@ -100,14 +100,14 @@ class Projects extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            page: 1,
+            page: 2,
             repos: [],
             loading: true,
         };
     }
 
     async componentDidMount() {
-        const reposList = await this.fetchRepos({ page: 1 });
+        const reposList = await this.fetchRepos({ page: this.state.page });
         this.setState({
             repos: reposList.data.data,
             page: this.state.page + 1,
