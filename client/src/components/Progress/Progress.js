@@ -9,22 +9,25 @@ import api from '../../api';
 import * as endpoints from '../../api/constants';
 
 const Progress = () => {
-    // ToDo: set default [] for data
     const [userData, setUserData] = useState({});
+    const [loading, setLoading] = useState(false);
 
     const fetchUserPullRequests = async username => {
-        // Send POST request
+        let data = {};
+        setLoading(true);
         try {
-            const { data } = await api({
+            ({ data } = await api({
                 method: 'POST',
                 url: endpoints.GET_PULL_REQUESTS_ENDPOINT,
                 data: {
                     username,
                 },
-            });
-            setUserData(data);
+            }));
         } catch (err) {
             // ToDo: handle no user found
+        } finally {
+            setLoading(false);
+            setUserData(data);
         }
     };
 
@@ -37,15 +40,18 @@ const Progress = () => {
         >
             <Container>
                 <FormSection fetchUserData={fetchUserPullRequests} />
-                <StatsHolder userData={userData} />
-                <Row className="mt-4 mt-sm-5">
-                    <Col md={8} className="mx-auto">
-                        {userData.data &&
-                            userData.data.map((item, index) => {
-                                return <ListItem item={item} key={index} />;
-                            })}
-                    </Col>
-                </Row>
+                {loading && <h2 className="text-center">Loading...</h2>}
+                {!loading && <StatsHolder userData={userData} />}
+                {!loading && (
+                    <Row className="mt-4 mt-sm-5">
+                        <Col md={8} className="mx-auto">
+                            {userData.data &&
+                                userData.data.map((item, index) => {
+                                    return <ListItem item={item} key={index} />;
+                                })}
+                        </Col>
+                    </Row>
+                )}
             </Container>
         </section>
     );
