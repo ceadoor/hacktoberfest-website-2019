@@ -12,7 +12,7 @@
     "server": "nodemon ./start.js"
   },
   "dependencies": {
-    "@octokit/rest": "^16.30.1",
+    "@octokit/rest": "^16.31.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
