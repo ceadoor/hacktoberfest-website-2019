@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 
 import { renderProjectCard } from '../Home/ProjectsSection';
+import LoadingIndicator from './LoadingIndicator';
 
 import api from '../../api';
 import * as endpoints from '../../api/constants';
@@ -153,7 +154,7 @@ class Projects extends Component {
                                 return renderProjectCard({ item, index });
                             })}
                         </div>
-                        {this.state.loading && <h2>Loading...</h2>}
+                        {this.state.loading && <LoadingIndicator />}
                         {!this.state.loading && (
                             <div className="text-center">
                                 <button className="btn button__main" type="button" onClick={this.loadMore}>
