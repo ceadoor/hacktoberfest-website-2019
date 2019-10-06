@@ -138,7 +138,7 @@ module.exports = {
                 title: 'How',
                 sub: 'Make 4 pull requests to GitHub-hosted repositories.',
             },
-            { id: '04', title: 'When', sub: 'Exact date to be declared soon' },
+            { id: '04', title: 'When', sub: '20th October 2019' },
         ],
     },
 
