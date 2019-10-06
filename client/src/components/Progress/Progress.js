@@ -32,16 +32,17 @@ const Progress = () => {
         <section
             style={{
                 padding: '30px auto',
+                marginBottom: '110px',
             }}
         >
             <Container>
                 <FormSection fetchUserData={fetchUserPullRequests} />
                 <StatsHolder userData={userData} />
-                <Row>
-                    <Col md={8}>
+                <Row className="mt-4 mt-sm-5">
+                    <Col md={8} className="mx-auto">
                         {userData.data &&
-                            userData.data.map(item => {
-                                return <ListItem item={item} />;
+                            userData.data.map((item, index) => {
+                                return <ListItem item={item} key={index} />;
                             })}
                     </Col>
                 </Row>
