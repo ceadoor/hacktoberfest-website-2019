@@ -53,6 +53,10 @@ Edit `config/index.js` file with your custom information
 
 Copy contents (images, documents, etc...) to `static/` directory
 
+#### 🌟 Publishing to surge.sh using GitHub Actions 
+
+Pass `SURGE_DOMAIN`, `SURGE_LOGIN`, `SURGE_TOKEN` to `settings/secrets` in GitHub Settings
+
 ## 🖤 Show your support
 
 Give a ⭐ if this you find this project useful!
