@@ -109,11 +109,21 @@ export const renderProjectCard = ({ item, index }) => {
                             <h2>{language}</h2>
                         </Col>
                     </Row>
-                    <p>{description}</p>
+                    <p>
+                        {description &&
+                            `${description
+                                .split(' ')
+                                .slice(0, 12)
+                                .join(' ')}...`}
+                    </p>
                     <div className="issue">
                         <p>
                             <span className="issue__span">#{number}</span>
-                            {issueTitle}
+                            {issueTitle &&
+                                issueTitle
+                                    .split(' ')
+                                    .slice(0, 8)
+                                    .join(' ')}
                         </p>
                     </div>
                 </div>
