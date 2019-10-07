@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
+import FormSection from './FormSection';
+
 const Register = () => {
     return (
         <section
@@ -9,7 +11,9 @@ const Register = () => {
                 marginBottom: '110px',
             }}
         >
-            <Container>Register Now</Container>
+            <Container>
+                <FormSection />
+            </Container>
         </section>
     );
 };
