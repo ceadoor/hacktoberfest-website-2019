@@ -247,3 +247,27 @@ exports.getGSheetRawContents = async () => {
 
     return { content: rows };
 };
+
+exports.regCandidateToEvent = async ({ name, email, department, contactNumber, year }) => {
+    const doc = new GoogleSpreadsheet(process.env.GSHEETS_ID);
+    await promisify(doc.useServiceAccountAuth)(creds);
+    const info = await promisify(doc.getInfo)();
+    const sheet = info.worksheets[0];
+
+    const newCandidate = {
+        name,
+        email,
+        department,
+        year,
+        contactNumber,
+    };
+
+    // ToDo: Check if email already exists in sheet
+
+    try {
+        await promisify(sheet.addRow)(newCandidate);
+    } catch (err) {
+        return { status: false };
+    }
+    return { status: true };
+};

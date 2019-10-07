@@ -40,3 +40,14 @@ exports.getGSheetContents = async (req, res) => {
 
     res.status(200).json({ data: content });
 };
+
+/**
+ *  Create registration entry
+ */
+
+exports.registerCandidate = async (req, res) => {
+    const { name, email, department, contactNumber, year } = req.body;
+
+    const { status } = await app.regCandidateToEvent({ name, email, department, contactNumber, year });
+    res.status(200).json({ status });
+};
