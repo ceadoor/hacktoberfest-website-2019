@@ -193,7 +193,11 @@ const Footer = () => {
                 <Row>
                     <Col md={12}>
                         <p className="footer__text">
-                            &copy; 2019 <a href={repoLink}>TRACECEA.</a> ALL RIGHTS RESERVED.
+                            &copy; 2019{' '}
+                            <a href={repoLink} target="_blank" rel="noopener noreferrer">
+                                TRACECEA.
+                            </a>{' '}
+                            ALL RIGHTS RESERVED.
                         </p>
                     </Col>
                 </Row>

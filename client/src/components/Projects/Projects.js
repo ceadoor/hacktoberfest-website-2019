@@ -120,8 +120,9 @@ class Projects extends Component {
     fetchRepos = async ({ page }) => {
         try {
             const reposList = await api({
-                url: endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT,
                 method: 'POST',
+                url: endpoints.GET_HACKTOBERFEST_REPOS_ENDPOINT,
+                timeout: 10000,
                 data: { page, perPage: 9 },
             });
             return reposList;
