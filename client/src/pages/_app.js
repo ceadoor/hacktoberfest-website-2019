@@ -10,6 +10,7 @@ import Details from './details';
 import Progress from './progress';
 import Projects from './projects';
 import NotFound from './not-found';
+import FaqPage from './faqs';
 
 // eslint-disable-next-line import/no-unresolved, import/no-webpack-loader-syntax
 const theme = require('sass-extract-loader?{"plugins": ["sass-extract-js"]}!../styles/base/_variables.scss');
@@ -26,6 +27,7 @@ const ReactApp = () => {
                             <Route path="/details" exact component={Details} />
                             <Route path="/progress" exact component={Progress} />
                             <Route path="/projects" exact component={Projects} />
+                            <Route path="/faqs" exact component={FaqPage} />
                             <Route path="" component={NotFound} />
                         </Switch>
                     </div>
