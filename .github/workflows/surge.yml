@@ -22,6 +22,8 @@ jobs:
       -
         name: 'Build react app'
         run: 'yarn run build:web'
+        env:
+          REACT_APP_API_ENDPOINT: ${{ secrets.REACT_APP_API_ENDPOINT }}
       -
         name: 'Deploy react app to surge.sh'
         uses: dswistowski/surge-sh-action@v1
