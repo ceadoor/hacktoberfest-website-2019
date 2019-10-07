@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "abhijithvijayan",
   "private": true,
-  "description": "Website for Hacktoberfest event of 2019",
+  "description": "Website for Hacktoberfest 2019 powered by TraceCEA",
   "repository": "https://github.com/ceadoor/hacktoberfest-website-2019.git",
   "license": "MIT",
   "engines": {
