@@ -30,6 +30,9 @@ const StyledWrapper = styled(Row)`
             transform: rotate(-60deg);
             .hex2 {
                 transform: rotate(-60deg);
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 img {
                     transform: rotate(30deg);
                 }
