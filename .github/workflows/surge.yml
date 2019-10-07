@@ -21,7 +21,7 @@ jobs:
         run: 'yarn install'
       -
         name: 'Build react app'
-        run: 'yarn run build'
+        run: 'yarn run build:web'
       -
         name: 'Deploy react app to surge.sh'
         uses: dswistowski/surge-sh-action@v1
