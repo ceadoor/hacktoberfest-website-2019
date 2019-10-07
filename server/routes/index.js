@@ -27,8 +27,12 @@ router.post(
 
 router.get('/api/v1/getSheetContents', catchErrors(api.getGSheetContents));
 
-// ToDo: Add fields validation to body
-router.post('/api/v1/register', catchErrors(api.registerCandidate));
+router.post(
+    '/api/v1/register',
+    validate.registerCandidateCriterias,
+    validate.registerCandidateBody,
+    catchErrors(api.registerCandidate)
+);
 
 if (process.env.NODE_ENV === 'production') {
     // Handles any requests that don't match the ones above
