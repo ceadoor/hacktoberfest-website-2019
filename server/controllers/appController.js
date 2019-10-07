@@ -248,11 +248,30 @@ exports.getGSheetRawContents = async () => {
     return { content: rows };
 };
 
+/**
+ *  Get Individual Record
+ */
+
+const getRegistrationRecord = async email => {
+    const { content } = await this.getGSheetRawContents();
+    return content.filter(val => {
+        return val.email === email;
+    })[0];
+};
+
 exports.regCandidateToEvent = async ({ name, email, department, contactNumber, year }) => {
     const doc = new GoogleSpreadsheet(process.env.GSHEETS_ID);
     await promisify(doc.useServiceAccountAuth)(creds);
     const info = await promisify(doc.getInfo)();
     const sheet = info.worksheets[0];
+
+    // Check if email already exists in sheet
+    const user = await getRegistrationRecord(email);
+    if (user) {
+        return { status: false, message: 'This user has already registered' };
+    }
+
+    // ToDo: Add registration limit
 
     const newCandidate = {
         name,
@@ -262,12 +281,10 @@ exports.regCandidateToEvent = async ({ name, email, department, contactNumber, y
         contactNumber,
     };
 
-    // ToDo: Check if email already exists in sheet
-
     try {
         await promisify(sheet.addRow)(newCandidate);
     } catch (err) {
-        return { status: false };
+        return { status: false, message: 'Registration failed' };
     }
-    return { status: true };
+    return { status: true, message: 'Registration success' };
 };
