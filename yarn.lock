@@ -9173,6 +9173,11 @@ react-error-overlay@^6.0.3:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.3.tgz#c378c4b0a21e88b2e159a3e62b2f531fd63bf60d"
   integrity sha512-bOUvMWFQVk5oz8Ded9Xb7WVdEi3QGLC8tH7HmYP0Fdp4Bn3qw0tRFmr5TW6mvahzvmrK4a6bqWGfCevBflP+Xw==
 
+react-final-form-html5-validation@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-final-form-html5-validation/-/react-final-form-html5-validation-1.0.3.tgz#b04b8025510bd8d751ea2ff58b90c7b7a7358a96"
+  integrity sha512-gNJ8xO/qcIRZYzWglPT7/KC1EDpsfMw+h/tKvcqYntcELN3TWga7yiyda0yLQnx19RNyDlU97wUDraX2Sar/bg==
+
 react-final-form@^6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/react-final-form/-/react-final-form-6.3.0.tgz#b85ae123a3796b3e0c8f56033c8a5037f4497e76"
