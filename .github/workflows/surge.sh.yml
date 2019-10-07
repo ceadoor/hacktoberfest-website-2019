@@ -21,7 +21,7 @@ jobs:
         run: 'yarn install'
       -
         name: 'Build react app'
-        run: 'yarn run build:web'
+        run: 'yarn run deploy:web'
         env:
           REACT_APP_API_ENDPOINT: ${{ secrets.REACT_APP_API_ENDPOINT }}
       -

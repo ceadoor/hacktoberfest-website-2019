@@ -20,6 +20,7 @@
     "dev:web": "yarn workspace @hacktoberfest/client dev",
     "server": "yarn workspace @hacktoberfest/server server",
     "build:web": "yarn workspace @hacktoberfest/client build",
+    "deploy:web": "yarn workspace @hacktoberfest/client deploy",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
