@@ -1,4 +1,5 @@
 const app = require('../../controllers/appController');
+// const { accessGSheetsAPI } = require('./routes/api/gsheets');
 
 exports.sendStatus = (req, res) => {
     res.json({ status: 'API ok' });
@@ -28,4 +29,14 @@ exports.fetchHacktoberfestRepos = async (req, res) => {
     const { page, perPage } = req.body;
     const { data, fetchedAt } = await app.getHacktoberfestRepos({ page, perPage, octokit });
     res.status(200).json({ data, fetchedAt });
+};
+
+/**
+ *  Get Registration Data
+ */
+
+exports.getGSheetContents = async (req, res) => {
+    const { content } = await app.getGSheetRawContents();
+
+    res.status(200).json({ data: content });
 };

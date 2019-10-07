@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 const _ = require('lodash');
 const moment = require('moment');
+const { promisify } = require('util');
+const GoogleSpreadsheet = require('google-spreadsheet');
 
 exports.getIndex = (req, res) => {
     res.json({ status: '200' });
@@ -206,4 +208,42 @@ exports.getUserDetails = async ({ username, octokit }) => {
         error: "Couldn't find any data or we hit an error, try again ?",
         userExists,
     };
+};
+
+/**
+ *  Google SpreadSheets API Call
+ */
+
+/**
+ *  For Production Only
+ */
+function credsFromEnvironment() {
+    return {
+        private_key: process.env.G_PKEY.replace(/\\n/g, '\n'),
+        client_email: process.env.G_C_EMAIL,
+    };
+}
+
+let creds;
+try {
+    // eslint-disable-next-line global-require
+    creds = require('../gservice.json');
+} catch {
+    creds = credsFromEnvironment();
+}
+
+/**
+ *  Retrieve Registration Data
+ */
+exports.getGSheetRawContents = async () => {
+    const doc = new GoogleSpreadsheet(process.env.GSHEETS_ID);
+    await promisify(doc.useServiceAccountAuth)(creds);
+    const info = await promisify(doc.getInfo)();
+    const sheet = info.worksheets[0];
+
+    const rows = await promisify(sheet.getRows)({
+        offset: 1,
+    });
+
+    return { content: rows };
 };
