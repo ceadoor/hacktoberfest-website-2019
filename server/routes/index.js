@@ -25,6 +25,15 @@ router.post(
     catchErrors(api.fetchHacktoberfestRepos)
 );
 
+router.get('/api/v1/getSheetContents', catchErrors(api.getGSheetContents));
+
+router.post(
+    '/api/v1/register',
+    validate.registerCandidateCriterias,
+    validate.registerCandidateBody,
+    catchErrors(api.registerCandidate)
+);
+
 if (process.env.NODE_ENV === 'production') {
     // Handles any requests that don't match the ones above
     router.get('*', (req, res) => {

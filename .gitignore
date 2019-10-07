@@ -85,3 +85,5 @@ typings/
 variables.env
 
 .vscode
+
+gservice.json
