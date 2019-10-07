@@ -1,0 +1,32 @@
+name: 'Publish to surge.sh'
+on:
+  push:
+    branches:    
+      - master 
+jobs:
+  build:
+    name: 'surge.sh deploy'
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: 'Use GitHub Actions'
+        uses: actions/checkout@v1
+      -
+        name: 'Use Node.js 10.x'
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      -
+        name: 'Install Dependencies'
+        run: 'yarn install'
+      -
+        name: 'Build react app'
+        run: 'yarn run build'
+      -
+        name: 'Deploy react app to surge.sh'
+        uses: dswistowski/surge-sh-action@v1
+        with:
+          domain: ${{ secrets.SURGE_DOMAIN }}
+          project: 'client/build'
+          login: ${{ secrets.SURGE_LOGIN }}
+          token: ${{ secrets.SURGE_TOKEN }}
