@@ -1,17 +1,23 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { Field } from 'react-final-form-html5-validation';
 
-import { Field } from 'react-final-form';
 import Wizard from './Wizard';
-
-const sleep = ms => {
-    return new Promise(resolve => {
-        return setTimeout(resolve, ms);
-    });
-};
+import * as endpoints from '../../api/constants.js';
+import api from '../../api';
 
 const onSubmit = async values => {
-    await sleep(300);
-    window.alert(JSON.stringify(values, 0, 2));
+    try {
+        const {
+            data: { status, message },
+        } = await api({
+            method: 'POST',
+            url: endpoints.REGISTER_FOR_EVENT_ENDPOINT,
+            data: values,
+        });
+    } catch (err) {
+        console.log('Reg failed');
+    }
 };
 
 const Error = ({ name }) => {
@@ -47,8 +53,8 @@ const RegisterForm = () => {
                         if (!values.email) {
                             errors.email = 'Required';
                         }
-                        if (!values.contact) {
-                            errors.contact = 'Required';
+                        if (!values.contactNumber) {
+                            errors.contactNumber = 'Required';
                         }
                         return errors;
                     }}
@@ -60,8 +66,8 @@ const RegisterForm = () => {
                     </div>
                     <div>
                         <label>Contact Number</label>
-                        <Field name="contact" component="input" type="number" />
-                        <Error name="contact" />
+                        <Field name="contactNumber" component="input" type="number" />
+                        <Error name="contactNumber" />
                     </div>
                 </Wizard.Page>
                 <Wizard.Page
@@ -97,6 +103,30 @@ const RegisterForm = () => {
                             <option value="EEE">EEE</option>
                         </Field>
                         <Error name="department" />
+                    </div>
+                </Wizard.Page>
+                <Wizard.Page
+                    validate={values => {
+                        const errors = {};
+                        if (!values.consent) {
+                            errors.consent = 'Please agree to continue';
+                        }
+                        if (values.consent === 'disagree') {
+                            errors.consent = 'Please agree to continue';
+                        }
+                        return errors;
+                    }}
+                >
+                    <div>
+                        <label>
+                            I
+                            <Field name="consent" component="input" type="radio" value="agree" /> Agree
+                        </label>
+                        <label>
+                            <Field name="consent" component="input" type="radio" value="disagree" /> Disagree
+                        </label>
+                        <label>that the information entered is true.</label>
+                        <Error name="consent" />
                     </div>
                 </Wizard.Page>
             </Wizard>

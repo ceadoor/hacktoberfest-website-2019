@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Form } from 'react-final-form';
 
-class Wizard extends React.Component {
+class Wizard extends Component {
     static Page = ({ children }) => {
         return children;
     };
@@ -10,7 +10,6 @@ class Wizard extends React.Component {
         super(props);
         this.state = {
             page: 0,
-            values: props.initialValues || {},
         };
     }
 
@@ -54,12 +53,12 @@ class Wizard extends React.Component {
 
     render() {
         const { children } = this.props;
-        const { page, values } = this.state;
+        const { page } = this.state;
         const activePage = React.Children.toArray(children)[page];
         const isLastPage = page === React.Children.count(children) - 1;
         return (
             <Form validate={this.validate} onSubmit={this.handleSubmit}>
-                {({ handleSubmit, submitting, values }) => {
+                {({ handleSubmit, submitting }) => {
                     return (
                         <form onSubmit={handleSubmit}>
                             {activePage}
