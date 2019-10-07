@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import FormSection from './FormSection';
 import StatsHolder from './StatsHolder';
 import ListItem from './ListItem';
+import LoadingIndicator from '../Projects/LoadingIndicator';
 
 import api from '../../api';
 import * as endpoints from '../../api/constants';
@@ -16,6 +17,7 @@ const Progress = () => {
     const fetchUserPullRequests = async username => {
         let data = {};
         setLoading(true);
+        setErrored(false);
         try {
             ({ data } = await api({
                 method: 'POST',
@@ -42,7 +44,7 @@ const Progress = () => {
         >
             <Container>
                 <FormSection fetchUserData={fetchUserPullRequests} />
-                {loading && <h2 className="text-center">Loading...</h2>}
+                {loading && <LoadingIndicator />}
                 {!loading && <StatsHolder userData={userData} />}
                 {!loading && (
                     <Row className="mt-4 mt-sm-5">
