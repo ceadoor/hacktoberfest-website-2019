@@ -3,6 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import LoadingIndicator from '../Projects/LoadingIndicator';
 import { heroProjects } from '../../config';
 import api from '../../api';
 import * as endpoints from '../../api/constants';
@@ -164,7 +165,7 @@ class ProjectsSection extends Component {
                         })}
                     </div>
                     {this.state.loading ? (
-                        <h2>Loading...</h2>
+                        <LoadingIndicator />
                     ) : (
                         <Link to="/projects" className="btn button__main">
                             Browse more
