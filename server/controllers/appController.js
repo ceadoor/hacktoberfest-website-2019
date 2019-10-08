@@ -331,5 +331,10 @@ exports.regCandidateToEvent = async ({ name, email, department, contactNumber, y
     // Send Email
     const emailResponse = await sendEnquiryEmail(newCandidate);
 
-    return { status: true, message: 'Registration successful. Please check your email.', user: newCandidate, mailStatus: emailResponse.status };
+    return {
+        status: true,
+        message: 'Registration successful. Please check your email. If not found, Check in spam.',
+        user: newCandidate,
+        mailStatus: emailResponse.status,
     };
+};
