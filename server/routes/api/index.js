@@ -48,9 +48,10 @@ exports.getGSheetContents = async (req, res) => {
 exports.registerCandidate = async (req, res) => {
     const { name, email, department, contactNumber, year } = req.body;
 
-    const { status, message } = await app.regCandidateToEvent({ name, email, department, contactNumber, year });
+    const response = await app.regCandidateToEvent({ name, email, department, contactNumber, year });
+    const { status, message } = response;
     if (status) {
-        return res.status(201).json({ status, message });
+        return res.status(201).json({ status, message, user: response.user, mailStatus: response.mailStatus });
     }
     return res.status(403).json({ status, message });
 };

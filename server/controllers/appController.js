@@ -2,11 +2,24 @@
 const _ = require('lodash');
 const moment = require('moment');
 const { promisify } = require('util');
+const nodemailer = require('nodemailer');
+const generate = require('nanoid/generate');
 const GoogleSpreadsheet = require('google-spreadsheet');
 
 exports.getIndex = (req, res) => {
     res.json({ status: '200' });
 };
+
+const transporter = nodemailer.createTransport({
+    service: 'Zoho',
+    host: 'smtp.zoho.com',
+    port: 587,
+    secure: false,
+    auth: {
+        user: process.env.MAIL_USER_ID,
+        pass: process.env.MAIL_USER_PWD,
+    },
+});
 
 const buildSearchQuery = (username, searchYear) => {
     return `-label:invalid+created:${searchYear}-09-30T00:00:00-12:00..${searchYear}-10-31T23:59:59-12:00+type:pr+is:public+author:${username}`;
@@ -252,11 +265,30 @@ exports.getGSheetRawContents = async () => {
  *  Get Individual Record
  */
 
-const getRegistrationRecord = async email => {
-    const { content } = await this.getGSheetRawContents();
+const getRegistrationRecord = async ({ email, content }) => {
     return content.filter(val => {
         return val.email === email;
     })[0];
+};
+
+const sendEnquiryEmail = async ({ name, email, uuid, department, year }) => {
+    const message = `Hi ${name},<br /><br /> Your registration to attend hacktoberfest powered by TRACECEA is successful.<br /><br /> Here is your ID: <b>${uuid}</b>. <br /><br /> Bring College ID along when you attend the event on 10th October @ 9:30am.<br />`;
+
+    const mailOptions = {
+        from: `TraceCEA | Hacktoberfest 2019 <tracecea@protonmail.com>`,
+        to: `${email}`,
+        subject: 'Registration Successful',
+        text: `${message}`, // plaintext body
+        html: `${message} <br />Visit <a href="https://hacktoberfest-tracecea.surge.sh">https://hacktoberfest-tracecea.surge.sh</a> for more details. <br><br> Name: ${name} <br> ID: ${uuid}<br> Email: ${email} <br> Year & Department: ${year}, ${department} <br /><br /> Thanks`,
+    };
+
+    // send mail with defined transport object
+    const info = await transporter.sendMail(mailOptions);
+
+    if (info) {
+        return { status: true, message: 'Email sent.' };
+    }
+    return { status: false, message: 'Email sending failed.' };
 };
 
 exports.regCandidateToEvent = async ({ name, email, department, contactNumber, year }) => {
@@ -266,12 +298,20 @@ exports.regCandidateToEvent = async ({ name, email, department, contactNumber, y
     const sheet = info.worksheets[0];
 
     // Check if email already exists in sheet
-    const user = await getRegistrationRecord(email);
+    const { content } = await this.getGSheetRawContents();
+
+    const user = await getRegistrationRecord({ email, content });
     if (user) {
         return { status: false, message: 'This user has already registered' };
     }
 
-    // ToDo: Add registration limit
+    // Add registration limit
+    const userLimit = parseInt(process.env.REG_LIMIT, 10);
+    if (content.length >= userLimit) {
+        return { status: false, message: 'The Registration is full!' };
+    }
+
+    const randomID = generate('1245689ABEFKLPRTVXZ', 8);
 
     const newCandidate = {
         name,
@@ -279,6 +319,7 @@ exports.regCandidateToEvent = async ({ name, email, department, contactNumber, y
         department,
         year,
         contactNumber,
+        uuid: `${randomID.slice(0, 4)}-${randomID.slice(4, 8)}`,
     };
 
     try {
@@ -286,5 +327,9 @@ exports.regCandidateToEvent = async ({ name, email, department, contactNumber, y
     } catch (err) {
         return { status: false, message: 'Either the registration is closed or something happened!' };
     }
-    return { status: true, message: 'Registration successful' };
+
+    // Send Email
+    const emailResponse = await sendEnquiryEmail(newCandidate);
+
+    return { status: true, message: 'Registration successful', user: newCandidate, mailStatus: emailResponse.status };
 };
