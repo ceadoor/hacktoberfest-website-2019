@@ -4,11 +4,12 @@ import { Row, Col, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const StyledFaq = styled.div`
-    /* padding: 40px 50px; */
+    margin-top: 50px;
     margin-bottom: 130px;
     .header {
         padding: 20px 0px 40px 0px;
         h2 {
+            padding-top: 40px;
             color: ${({ theme }) => {
                 return theme.white;
             }};
@@ -50,9 +51,7 @@ class Faq extends Component {
                                     Have questions? These are the most Frequently Asked Questions about Hacktoberfest.
                                 </p>
                             </div>
-                            <a name="general">
-                                <h2 className="title is-2 highlight">General </h2>
-                            </a>
+                            <h2 className="title is-2 highlight">General </h2>
                             <div className="question-answer">
                                 <div className="question">
                                     <p>What is Hacktoberfest?</p>
@@ -243,9 +242,7 @@ class Faq extends Component {
                                 </div>
                             </div>
 
-                            <a name="rules">
-                                <h2 className="title is-2 highlight">Rules</h2>
-                            </a>
+                            <h2 className="title is-2 highlight">Rules</h2>
                             <div className="question-answer">
                                 <div className="question">
                                     <p>Do contributions made outside of GitHub count?</p>
@@ -331,9 +328,7 @@ class Faq extends Component {
                                 </div>
                             </div>
 
-                            <a name="shipping">
-                                <h2 className="title is-2 highlight">Shipping </h2>
-                            </a>
+                            <h2 className="title is-2 highlight">Shipping </h2>
                             <div className="question-answer">
                                 <div className="question">
                                     <p>Will I have to pay anything to receive my T-shirt/stickers?</p>
