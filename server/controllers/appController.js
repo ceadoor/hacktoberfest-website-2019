@@ -2,6 +2,7 @@
 const _ = require('lodash');
 const moment = require('moment');
 const { promisify } = require('util');
+const generate = require('nanoid/generate');
 const GoogleSpreadsheet = require('google-spreadsheet');
 
 exports.getIndex = (req, res) => {
@@ -278,12 +279,15 @@ exports.regCandidateToEvent = async ({ name, email, department, contactNumber, y
         return { status: false, message: 'The Registration is full!' };
     }
 
+    const randomID = generate('1245689ABEFKLPRTVXZ', 8);
+
     const newCandidate = {
         name,
         email,
         department,
         year,
         contactNumber,
+        uuid: `${randomID.slice(0, 4)}-${randomID.slice(4, 8)}`,
     };
 
     try {
