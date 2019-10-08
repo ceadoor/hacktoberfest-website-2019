@@ -338,3 +338,19 @@ exports.regCandidateToEvent = async ({ name, email, department, contactNumber, y
         mailStatus: emailResponse.status,
     };
 };
+
+exports.getRemainingSeatCount = async () => {
+    const { content } = await this.getGSheetRawContents();
+    const userLimit = parseInt(process.env.REG_LIMIT, 10);
+    const seatsCount = userLimit - content.length;
+
+    if (content.length >= userLimit) {
+        return { status: false, message: 'The Registration is full!' };
+    }
+
+    return {
+        status: true,
+        message: 'Registration not full',
+        seatsCount,
+    };
+};

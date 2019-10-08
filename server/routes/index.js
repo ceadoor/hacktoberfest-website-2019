@@ -34,6 +34,8 @@ router.post(
     catchErrors(api.registerCandidate)
 );
 
+router.get('/api/v1/getRemainingSeatsCount', catchErrors(api.getRemainingSeatsNumber));
+
 if (process.env.NODE_ENV === 'production') {
     // Handles any requests that don't match the ones above
     router.get('*', (req, res) => {
