@@ -295,5 +295,5 @@ exports.regCandidateToEvent = async ({ name, email, department, contactNumber, y
     } catch (err) {
         return { status: false, message: 'Either the registration is closed or something happened!' };
     }
-    return { status: true, message: 'Registration successful' };
+    return { status: true, message: 'Registration successful', user: newCandidate };
 };
