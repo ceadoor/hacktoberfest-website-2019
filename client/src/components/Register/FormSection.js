@@ -53,7 +53,8 @@ const FormSection = () => {
                 <h2 className="subhead">Register Now</h2>
                 {!remainingSeats && !isErrored && <p>Fetching remaining seats...</p>}
                 {remainingSeats && !isErrored && <p>{remainingSeats} Seats remaining</p>}
-                <RegisterForm />
+                {isErrored && <p>Registration Full! Sorry.</p>}
+                {!isErrored && <RegisterForm />}
             </Col>
         </StyledWrapper>
     );
