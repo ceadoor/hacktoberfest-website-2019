@@ -60,7 +60,7 @@ exports.getRemainingSeatsNumber = async (req, res) => {
     const response = await app.getRemainingSeatCount();
     const { status, message } = response;
     if (status) {
-        return res.status(201).json({ status, message, seatsCount: response.seatsCount });
+        return res.status(200).json({ status, message, seatsCount: response.seatsCount });
     }
     return res.status(403).json({ status, message });
 };

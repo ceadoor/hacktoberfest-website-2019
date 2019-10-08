@@ -344,7 +344,7 @@ exports.getRemainingSeatCount = async () => {
     const userLimit = parseInt(process.env.REG_LIMIT, 10);
     const seatsCount = userLimit - content.length;
 
-    if (content.length >= userLimit) {
+    if (seatsCount <= 0) {
         return { status: false, message: 'The Registration is full!' };
     }
 

@@ -52,7 +52,7 @@ const FormSection = () => {
             <Col md={12} xs={12} className="wrapper">
                 <h2 className="subhead">Register Now</h2>
                 {!remainingSeats && !isErrored && <p>Fetching remaining seats...</p>}
-                {remainingSeats && !isErrored && <p>${remainingSeats} Seats remaining</p>}
+                {remainingSeats && !isErrored && <p>{remainingSeats} Seats remaining</p>}
                 <RegisterForm />
             </Col>
         </StyledWrapper>
