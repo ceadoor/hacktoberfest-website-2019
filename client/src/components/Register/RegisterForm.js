@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { Field } from 'react-final-form-html5-validation';
+import { Form, Col } from 'react-bootstrap';
 
 import Wizard from './Wizard';
 import * as endpoints from '../../api/constants.js';
@@ -26,26 +27,40 @@ const Error = ({ name }) => {
             name={name}
             subscribe={{ touched: true, error: true }}
             render={({ meta: { touched, error } }) => {
-                return touched && error ? <span>{error}</span> : null;
+                return touched && error ? <span className="invalid__feedback">{error}</span> : null;
             }}
         />
     );
-};
-
-const required = value => {
-    return value ? undefined : 'Required';
 };
 
 const RegisterForm = () => {
     return (
         <>
             <Wizard onSubmit={onSubmit}>
-                <Wizard.Page>
-                    <div>
-                        <label>Full Name</label>
-                        <Field name="name" component="input" type="text" validate={required} />
-                        <Error name="name" />
-                    </div>
+                <Wizard.Page
+                    validate={values => {
+                        const errors = {};
+                        if (!values.name) {
+                            errors.name = 'Required';
+                        }
+                        if (values.name && values.name.length < 6) {
+                            errors.name = 'Name must be atleast 6 characters';
+                        }
+                        return errors;
+                    }}
+                >
+                    <Form.Row className="justify-content-center">
+                        <Form.Group as={Col} md="9" lg="8">
+                            <Field
+                                name="name"
+                                className="form-control"
+                                placeholder="What's your full name?"
+                                component="input"
+                                type="text"
+                            />
+                            <Error name="name" />
+                        </Form.Group>
+                    </Form.Row>
                 </Wizard.Page>
                 <Wizard.Page
                     validate={values => {
@@ -56,19 +71,36 @@ const RegisterForm = () => {
                         if (!values.contactNumber) {
                             errors.contactNumber = 'Required';
                         }
+                        if (values.contactNumber && values.contactNumber.length < 10) {
+                            errors.contactNumber = 'Contact number must be atleast 10 digits';
+                        }
                         return errors;
                     }}
                 >
-                    <div>
-                        <label>Email</label>
-                        <Field name="email" component="input" type="email" />
-                        <Error name="email" />
-                    </div>
-                    <div>
-                        <label>Contact Number</label>
-                        <Field name="contactNumber" component="input" type="number" />
-                        <Error name="contactNumber" />
-                    </div>
+                    <Form.Row className="justify-content-center">
+                        <Form.Group as={Col} md="9" lg="8">
+                            <Field
+                                name="email"
+                                className="form-control"
+                                placeholder="What's you email?"
+                                component="input"
+                                type="email"
+                            />
+                            <Error name="email" />
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row className="justify-content-center">
+                        <Form.Group as={Col} md="9" lg="8">
+                            <Field
+                                name="contactNumber"
+                                className="form-control"
+                                placeholder="And your contact number?"
+                                component="input"
+                                type="number"
+                            />
+                            <Error name="contactNumber" />
+                        </Form.Group>
+                    </Form.Row>
                 </Wizard.Page>
                 <Wizard.Page
                     validate={values => {
@@ -82,28 +114,32 @@ const RegisterForm = () => {
                         return errors;
                     }}
                 >
-                    <div>
-                        <label>Year</label>
-                        <Field name="year" component="select">
-                            <option />
-                            <option value={1}>1</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                        </Field>
-                        <Error name="year" />
-                    </div>
-                    <div>
-                        <label>Department</label>
-                        <Field name="department" component="select">
-                            <option />
-                            <option value="CSE">CSE</option>
-                            <option value="EC">EC</option>
-                            <option value="Mech">Mech</option>
-                            <option value="EEE">EEE</option>
-                        </Field>
-                        <Error name="department" />
-                    </div>
+                    <Form.Row className="justify-content-center">
+                        <Form.Group as={Col} xs="3" md="2">
+                            <label>Year</label>
+                            <Field name="year" className="form-control" component="select">
+                                <option />
+                                <option value={1}>1</option>
+                                <option value={2}>2</option>
+                                <option value={3}>3</option>
+                                <option value={4}>4</option>
+                            </Field>
+                            <Error name="year" />
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row className="justify-content-center">
+                        <Form.Group as={Col} xs="4" md="3">
+                            <label>Department</label>
+                            <Field name="department" className="form-control" component="select">
+                                <option />
+                                <option value="CSE">CSE</option>
+                                <option value="EC">EC</option>
+                                <option value="Mech">Mech</option>
+                                <option value="EEE">EEE</option>
+                            </Field>
+                            <Error name="department" />
+                        </Form.Group>
+                    </Form.Row>
                 </Wizard.Page>
                 <Wizard.Page
                     validate={values => {
@@ -117,17 +153,26 @@ const RegisterForm = () => {
                         return errors;
                     }}
                 >
-                    <div>
-                        <label>
-                            I
-                            <Field name="consent" component="input" type="radio" value="agree" /> Agree
-                        </label>
-                        <label>
-                            <Field name="consent" component="input" type="radio" value="disagree" /> Disagree
-                        </label>
-                        <label>that the information entered is true.</label>
-                        <Error name="consent" />
-                    </div>
+                    <Form.Row className="justify-content-center">
+                        <Form.Group as={Col} md="8">
+                            <label className="form-check-label">
+                                I<Field name="consent" className="ml-2" component="input" type="radio" value="agree" />{' '}
+                                Agree
+                            </label>
+                            <label className="form-check-label">
+                                <Field
+                                    name="consent"
+                                    className="ml-2"
+                                    component="input"
+                                    type="radio"
+                                    value="disagree"
+                                />{' '}
+                                Disagree
+                            </label>
+                            <label className="ml-2">that the information entered is true.</label>
+                            <Error name="consent" />
+                        </Form.Group>
+                    </Form.Row>
                 </Wizard.Page>
             </Wizard>
         </>

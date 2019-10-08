@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form } from 'react-final-form';
+import { Button, Row, Col } from 'react-bootstrap';
 
 class Wizard extends Component {
     static Page = ({ children }) => {
@@ -62,19 +63,32 @@ class Wizard extends Component {
                     return (
                         <form onSubmit={handleSubmit}>
                             {activePage}
-                            <div className="buttons">
-                                {page > 0 && (
-                                    <button type="button" onClick={this.previous}>
-                                        « Previous
-                                    </button>
-                                )}
-                                {!isLastPage && <button type="submit">Next »</button>}
-                                {isLastPage && (
-                                    <button type="submit" disabled={submitting}>
-                                        Submit
-                                    </button>
-                                )}
-                            </div>
+                            <Row className="justify-content-center">
+                                <Col md={9} lg={8}>
+                                    <div style={{ marginTop: '0.5rem' }}>
+                                        {page > 0 && (
+                                            <Button
+                                                variant="primary"
+                                                className="mr-2"
+                                                type="button"
+                                                onClick={this.previous}
+                                            >
+                                                « Previous
+                                            </Button>
+                                        )}
+                                        {!isLastPage && (
+                                            <Button variant="primary" type="submit">
+                                                Next »
+                                            </Button>
+                                        )}
+                                        {isLastPage && (
+                                            <Button variant="primary" type="submit" disabled={submitting}>
+                                                Submit
+                                            </Button>
+                                        )}
+                                    </div>
+                                </Col>
+                            </Row>
                         </form>
                     );
                 }}
