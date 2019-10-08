@@ -51,7 +51,7 @@ exports.registerCandidate = async (req, res) => {
     const response = await app.regCandidateToEvent({ name, email, department, contactNumber, year });
     const { status, message } = response;
     if (status) {
-        return res.status(201).json({ status, message, user: response.user });
+        return res.status(201).json({ status, message, user: response.user, mailStatus: response.mailStatus });
     }
     return res.status(403).json({ status, message });
 };

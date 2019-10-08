@@ -2,12 +2,24 @@
 const _ = require('lodash');
 const moment = require('moment');
 const { promisify } = require('util');
+const nodemailer = require('nodemailer');
 const generate = require('nanoid/generate');
 const GoogleSpreadsheet = require('google-spreadsheet');
 
 exports.getIndex = (req, res) => {
     res.json({ status: '200' });
 };
+
+const transporter = nodemailer.createTransport({
+    service: 'Zoho',
+    host: 'smtp.zoho.com',
+    port: 587,
+    secure: false,
+    auth: {
+        user: process.env.MAIL_USER_ID,
+        pass: process.env.MAIL_USER_PWD,
+    },
+});
 
 const buildSearchQuery = (username, searchYear) => {
     return `-label:invalid+created:${searchYear}-09-30T00:00:00-12:00..${searchYear}-10-31T23:59:59-12:00+type:pr+is:public+author:${username}`;
@@ -259,6 +271,26 @@ const getRegistrationRecord = async ({ email, content }) => {
     })[0];
 };
 
+const sendEnquiryEmail = async ({ name, email, uuid, department, year }) => {
+    const message = `Hi ${name},<br /><br /> Your registration to attend hacktoberfest powered by TRACECEA is successful.<br /><br /> Here is your ID: <b>${uuid}</b>. <br /><br /> Bring College ID along when you attend the event on 10th October @ 9:30am.<br />`;
+
+    const mailOptions = {
+        from: `TraceCEA | Hacktoberfest 2019 <tracecea@protonmail.com>`,
+        to: `${email}`,
+        subject: 'Registration Successful',
+        text: `${message}`, // plaintext body
+        html: `${message} <br />Visit <a href="https://hacktoberfest-tracecea.surge.sh">https://hacktoberfest-tracecea.surge.sh</a> for more details. <br><br> Name: ${name} <br> ID: ${uuid}<br> Email: ${email} <br> Year & Department: ${year}, ${department} <br /><br /> Thanks`,
+    };
+
+    // send mail with defined transport object
+    const info = await transporter.sendMail(mailOptions);
+
+    if (info) {
+        return { status: true, message: 'Email sent.' };
+    }
+    return { status: false, message: 'Email sending failed.' };
+};
+
 exports.regCandidateToEvent = async ({ name, email, department, contactNumber, year }) => {
     const doc = new GoogleSpreadsheet(process.env.GSHEETS_ID);
     await promisify(doc.useServiceAccountAuth)(creds);
@@ -295,5 +327,9 @@ exports.regCandidateToEvent = async ({ name, email, department, contactNumber, y
     } catch (err) {
         return { status: false, message: 'Either the registration is closed or something happened!' };
     }
-    return { status: true, message: 'Registration successful', user: newCandidate };
+
+    // Send Email
+    const emailResponse = await sendEnquiryEmail(newCandidate);
+
+    return { status: true, message: 'Registration successful', user: newCandidate, mailStatus: emailResponse.status };
 };

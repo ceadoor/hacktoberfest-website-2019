@@ -23,7 +23,8 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
-    "nanoid": "^2.1.2"
+    "nanoid": "^2.1.2",
+    "nodemailer": "^6.3.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.3"
