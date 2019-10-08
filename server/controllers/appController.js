@@ -252,8 +252,7 @@ exports.getGSheetRawContents = async () => {
  *  Get Individual Record
  */
 
-const getRegistrationRecord = async email => {
-    const { content } = await this.getGSheetRawContents();
+const getRegistrationRecord = async ({ email, content }) => {
     return content.filter(val => {
         return val.email === email;
     })[0];
@@ -266,12 +265,18 @@ exports.regCandidateToEvent = async ({ name, email, department, contactNumber, y
     const sheet = info.worksheets[0];
 
     // Check if email already exists in sheet
-    const user = await getRegistrationRecord(email);
+    const { content } = await this.getGSheetRawContents();
+
+    const user = await getRegistrationRecord({ email, content });
     if (user) {
         return { status: false, message: 'This user has already registered' };
     }
 
-    // ToDo: Add registration limit
+    // Add registration limit
+    const userLimit = parseInt(process.env.REG_LIMIT, 10);
+    if (content.length >= userLimit) {
+        return { status: false, message: 'The Registration is full!' };
+    }
 
     const newCandidate = {
         name,
