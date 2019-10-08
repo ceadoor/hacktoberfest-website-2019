@@ -284,7 +284,7 @@ exports.regCandidateToEvent = async ({ name, email, department, contactNumber, y
     try {
         await promisify(sheet.addRow)(newCandidate);
     } catch (err) {
-        return { status: false, message: 'Registration failed' };
+        return { status: false, message: 'Either the registration is closed or something happened!' };
     }
-    return { status: true, message: 'Registration success' };
+    return { status: true, message: 'Registration successful' };
 };
