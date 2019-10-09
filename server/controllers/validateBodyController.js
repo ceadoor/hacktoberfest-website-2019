@@ -107,3 +107,25 @@ exports.registerCandidateBody = (req, res, next) => {
     }
     return next();
 };
+
+exports.getStudentDetailsCriterias = [
+    validator
+        .body('uuid')
+        .exists()
+        .withMessage('You must provide your uuid.'),
+];
+
+exports.getStudentDetailsBody = (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        const errorsObj = errors.mapped();
+        const uuidError = errorsObj.uuid && errorsObj.uuid.msg;
+        return res.status(400).json({
+            error: {
+                msg: uuidError,
+                _reported: new Date().getTime(),
+            },
+        });
+    }
+    return next();
+};
