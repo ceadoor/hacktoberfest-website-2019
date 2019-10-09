@@ -30,6 +30,8 @@ const StyledWrapper = styled(Row)`
 const FormSection = () => {
     const [remainingSeats, setSeatCount] = useState();
     const [isErrored, setErrored] = useState(false);
+    const [shouldHidePrevCount, togglePrevCount] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("Oops. Something's wrong! Come back later.");
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -40,8 +42,11 @@ const FormSection = () => {
                     url: endpoints.GET_REMAINING_SEATS_COUNT,
                 });
                 setSeatCount(seatsCount);
-            } catch (err) {
+            } catch ({ response: { data } }) {
                 setErrored(true);
+                if (data && data.message) {
+                    setErrorMessage(data.message);
+                }
             }
         };
         fetchData();
@@ -51,10 +56,10 @@ const FormSection = () => {
         <StyledWrapper>
             <Col md={12} xs={12} className="wrapper">
                 <h2 className="subhead">Register Now</h2>
-                {!remainingSeats && !isErrored && <p>Fetching remaining seats...</p>}
-                {remainingSeats && !isErrored && <p>{remainingSeats} Seats remaining</p>}
-                {isErrored && <p>Registration Full! Sorry.</p>}
-                {!isErrored && <RegisterForm />}
+                {!remainingSeats && !isErrored && !shouldHidePrevCount && <p>Fetching remaining seats...</p>}
+                {remainingSeats && !isErrored && !shouldHidePrevCount && <p>{remainingSeats} Seats remaining</p>}
+                {!isErrored && <RegisterForm hidePrevCount={togglePrevCount} />}
+                {isErrored && <p>{errorMessage}</p>}
             </Col>
         </StyledWrapper>
     );

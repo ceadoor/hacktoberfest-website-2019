@@ -20,7 +20,7 @@ const Error = ({ name }) => {
     );
 };
 
-const RegisterForm = () => {
+const RegisterForm = ({ hidePrevCount }) => {
     const [loading, setLoading] = useState(false);
     const [isErrored, setErrored] = useState(false);
     const [isSuccessful, setSuccess] = useState(false);
@@ -49,6 +49,8 @@ const RegisterForm = () => {
             }
         } finally {
             setLoading(false);
+            // Remove the earlier seats remaining count
+            hidePrevCount(true);
         }
     };
 
