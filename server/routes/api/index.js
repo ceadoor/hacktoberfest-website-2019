@@ -64,3 +64,13 @@ exports.getRemainingSeatsNumber = async (req, res) => {
     }
     return res.status(403).json({ status, message });
 };
+
+exports.getIndividualRecord = async (req, res) => {
+    const { uuid } = req.body;
+    const response = await app.getStudentDetails({ uuid });
+    const { status, message } = response;
+    if (status) {
+        return res.status(200).json({ status, message, user: response.user });
+    }
+    return res.status(403).json({ status, message });
+};

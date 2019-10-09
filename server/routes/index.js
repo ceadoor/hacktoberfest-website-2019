@@ -36,6 +36,8 @@ router.post(
 
 router.get('/api/v1/getRemainingSeatsCount', catchErrors(api.getRemainingSeatsNumber));
 
+router.post('/api/v1/getStudentDetails', catchErrors(api.getIndividualRecord));
+
 if (process.env.NODE_ENV === 'production') {
     // Handles any requests that don't match the ones above
     router.get('*', (req, res) => {

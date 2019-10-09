@@ -354,3 +354,31 @@ exports.getRemainingSeatCount = async () => {
         seatsCount,
     };
 };
+
+/**
+ *  For QR Code scanning
+ */
+
+const getRegRecordById = async ({ uuid, content }) => {
+    return content.filter(val => {
+        return val.uuid === uuid;
+    })[0];
+};
+
+exports.getStudentDetails = async ({ uuid }) => {
+    const { content } = await this.getGSheetRawContents();
+
+    const user = await getRegRecordById({ uuid, content });
+    if (user) {
+        const userDetails = {};
+        userDetails.uuid = user.uuid;
+        userDetails.name = user.name;
+        userDetails.email = user.email;
+        userDetails.contactNumber = user.contactnumber;
+        userDetails.department = user.department;
+        userDetails.year = user.year;
+
+        return { status: true, message: 'User Found', user: userDetails };
+    }
+    return { status: false, message: 'User Not Found' };
+};
