@@ -6,29 +6,23 @@ const nodemailer = require('nodemailer');
 const generate = require('nanoid/generate');
 const GoogleSpreadsheet = require('google-spreadsheet');
 
+// home sample route
 exports.getIndex = (req, res) => {
     res.json({ status: '200' });
 };
 
-const transporter = nodemailer.createTransport({
-    service: 'Zoho',
-    host: 'smtp.zoho.com',
-    port: 587,
-    secure: false,
-    auth: {
-        user: process.env.MAIL_USER_ID,
-        pass: process.env.MAIL_USER_PWD,
-    },
-});
-
+/**
+ *  Query for Getting User PRs
+ */
 const buildSearchQuery = (username, searchYear) => {
     return `-label:invalid+created:${searchYear}-09-30T00:00:00-12:00..${searchYear}-10-31T23:59:59-12:00+type:pr+is:public+author:${username}`;
 };
 
+/**
+ *  Fetch PRs of user
+ */
 const loadPRs = async ({ username, octokit }) => {
-    /**
-     *  Get correct-year
-     */
+    // get current / previous HFest year
     const today = new Date();
     const currentYear = today.getFullYear();
     const searchYear = today.getMonth() < 9 ? currentYear - 1 : currentYear;
@@ -56,6 +50,9 @@ const loadPRs = async ({ username, octokit }) => {
     return { list };
 };
 
+/**
+ *  Pull Requests Parser
+ */
 const parsePRs = ({ list }) => {
     return _.map(list, item => {
         const { pull_request, labels, number, state, title, html_url, user, created_at } = item;
@@ -90,7 +87,7 @@ const parsePRs = ({ list }) => {
 };
 
 /**
- *  Returns array of status flag
+ *  Returns array of merge status flag
  *  eg: [true, false]
  */
 const checkMergeStatus = async ({ list, octokit }) => {
@@ -119,10 +116,6 @@ const checkMergeStatus = async ({ list, octokit }) => {
     return result;
 };
 
-/**
- *  Fetch User Pull Requests Status
- */
-
 exports.getUserPRs = async ({ username, octokit }) => {
     const { list = [] } = await loadPRs({ username, octokit });
     const parsedPRsList = await parsePRs({ list });
@@ -140,6 +133,9 @@ exports.getUserPRs = async ({ username, octokit }) => {
     };
 };
 
+/**
+ *  Fetch Repos having hacktoberfest labels
+ */
 const loadRepos = async ({ page, perPage, octokit }) => {
     let list = [];
     try {
@@ -153,6 +149,9 @@ const loadRepos = async ({ page, perPage, octokit }) => {
     return list;
 };
 
+/**
+ *  Repo List Parser
+ */
 const parseRepos = ({ list, octokit }) => {
     const listData = _.map(list, async item => {
         const repo = item.repository_url.split('/');
@@ -177,10 +176,6 @@ const parseRepos = ({ list, octokit }) => {
     });
     return Promise.all(listData);
 };
-
-/**
- *  Fetch Hacktoberfest Labelled Repos
- */
 
 exports.getHacktoberfestRepos = async ({ page, perPage, octokit }) => {
     const {
@@ -224,12 +219,24 @@ exports.getUserDetails = async ({ username, octokit }) => {
 };
 
 /**
- *  Google SpreadSheets API Call
+ *  Email Transporter
  */
+const transporter = nodemailer.createTransport({
+    service: 'Zoho',
+    host: 'smtp.zoho.com',
+    port: 587,
+    secure: false,
+    auth: {
+        user: process.env.MAIL_USER_ID,
+        pass: process.env.MAIL_USER_PWD,
+    },
+});
 
 /**
- *  For Production Only
+ *  Google SpreadSheets API
  */
+
+// For Production Only
 function credsFromEnvironment() {
     return {
         private_key: process.env.G_PKEY.replace(/\\n/g, '\n'),
@@ -246,7 +253,7 @@ try {
 }
 
 /**
- *  Retrieve Registration Data
+ *  Retrieve All Registration Data
  */
 exports.getGSheetRawContents = async () => {
     const doc = new GoogleSpreadsheet(process.env.GSHEETS_ID);
@@ -259,16 +266,6 @@ exports.getGSheetRawContents = async () => {
     });
 
     return { content: rows };
-};
-
-/**
- *  Get Individual Record
- */
-
-const getRegistrationRecord = async ({ email, content }) => {
-    return content.filter(val => {
-        return val.email === email;
-    })[0];
 };
 
 const sendEnquiryEmail = async ({ name, email, uuid, department, year }) => {
@@ -289,6 +286,15 @@ const sendEnquiryEmail = async ({ name, email, uuid, department, year }) => {
         return { status: true, message: 'Email sent.' };
     }
     return { status: false, message: 'Email sending failed.' };
+};
+
+/**
+ *  Get Individual Record with email
+ */
+const getRegistrationRecord = async ({ email, content }) => {
+    return content.filter(val => {
+        return val.email === email;
+    })[0];
 };
 
 exports.regCandidateToEvent = async ({ name, email, department, contactNumber, year }) => {
@@ -313,6 +319,10 @@ exports.regCandidateToEvent = async ({ name, email, department, contactNumber, y
 
     const randomID = generate('1245689ABEFKLPRTVXZ', 8);
 
+    /**
+     *  ToDo: Check if uuid exists already
+     */
+
     const newCandidate = {
         name,
         email,
@@ -323,6 +333,7 @@ exports.regCandidateToEvent = async ({ name, email, department, contactNumber, y
     };
 
     try {
+        // add entry to google sheets
         await promisify(sheet.addRow)(newCandidate);
     } catch (err) {
         return { status: false, message: 'Either the registration is closed or something happened!' };
@@ -356,15 +367,17 @@ exports.getRemainingSeatCount = async () => {
 };
 
 /**
- *  For QR Code scanning
+ *  Get Individual record by uuid
  */
-
 const getRegRecordById = async ({ uuid, content }) => {
     return content.filter(val => {
         return val.uuid === uuid;
     })[0];
 };
 
+/**
+ *  For QR Code scanning
+ */
 exports.getStudentDetails = async ({ uuid }) => {
     const { content } = await this.getGSheetRawContents();
 
