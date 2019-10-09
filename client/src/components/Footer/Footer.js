@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Image, Container } from 'react-bootstrap';
 import styled from 'styled-components';
-import Tilt from 'react-tilt';
+import Tilt from 'react-parallax-tilt';
 
 import { domain, repoLink, twitterShare, githubLink, slackLink, instagramLink } from '../../config';
 import DOC from '../../static/Hacktoberfest_19_Events_lockup_ko_600x200.png';
@@ -143,7 +143,7 @@ const Footer = () => {
                         </div>
                     </Col>
                     <Col md={5} className="doc__logo--wrapper">
-                        <Tilt className="Tilt" options={{ max: 20, scale: 1.05 }}>
+                        <Tilt className="Tilt" gyroscope={true} tiltMaxAngleX={-10} tiltMaxAngleY={20} scale={1.05}>
                             <div className="Tilt-inner">
                                 <Image src={DOC} fluid />
                                 <p>Powered by TRACECEA</p>

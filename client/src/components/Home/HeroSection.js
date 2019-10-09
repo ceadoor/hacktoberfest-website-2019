@@ -3,7 +3,7 @@ import { Image, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
 import styled from 'styled-components';
-import Tilt from 'react-tilt';
+import Tilt from 'react-parallax-tilt';
 
 import Logo from '../../static/logo.svg';
 
@@ -64,7 +64,7 @@ const HeroSection = () => {
     return (
         <StyledRow>
             <Col md={7}>
-                <Tilt className="Tilt" options={{ max: 20, scale: 1.05 }}>
+                <Tilt className="Tilt" gyroscope={true} tiltMaxAngleX={-10} tiltMaxAngleY={20} scale={1.05}>
                     <div className="Tilt-inner">
                         <Image src={Logo} fluid />
                     </div>
