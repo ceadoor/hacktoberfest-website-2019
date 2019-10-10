@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { Field } from 'react-final-form-html5-validation';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col } from 'react-bootstrap';
 
 import Wizard from './Wizard';
 import LoadingIndicator from '../Projects/LoadingIndicator';
@@ -212,14 +212,9 @@ const RegisterForm = ({ hidePrevCount }) => {
                         <p className="text-center">Registration failed ! {infoMessage} </p>
                     )}
                     {!loading && (isSuccessful || isErrored) && (
-                        <Button
-                            onClick={() => {
-                                if (isErrored) return setErrored(false);
-                                if (isSuccessful) return setSuccess(false);
-                            }}
-                        >
+                        <a href="/register" className="btn btn-primary">
                             Register Again
-                        </Button>
+                        </a>
                     )}
                 </Col>
             </Row>
