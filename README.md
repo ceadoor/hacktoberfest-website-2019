@@ -10,6 +10,7 @@
 - BackEnd
     - [ExpressJs](https://expressjs.com/)
     - [GitHub API](https://github.com/octokit/rest.js/)
+    - [Google Sheets API](https://sheets.google.com/)
 - FrontEnd
     - [ReactJs](https://reactjs.org/)
     - [React Bootstrap](https://react-bootstrap.github.io/)
@@ -34,6 +35,10 @@ Copy `.env.sample` to `.env.development` or `.env.production` in `client/` direc
 ##### For Server
 
 Copy `variables.env.sample` to `variables.env` in `server/` directory and update the file.
+
+#### 🌟 Accessing Google Sheets API
+
+Follow instructions from [here](https://www.npmjs.com/package/google-spreadsheet#authentication) and update `GSHEETS_ID`, `G_PKEY`, `G_C_EMAIL` fields in `server/variables.env`
 
 #### 🌟 Accessing GitHub API
 
