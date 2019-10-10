@@ -44,8 +44,8 @@ const FormSection = () => {
                 setSeatCount(seatsCount);
             } catch ({ response: { data } }) {
                 setErrored(true);
-                if (data && data.message) {
-                    setErrorMessage(data.message);
+                if (data && data.message && data.error.msg) {
+                    setErrorMessage(data.error.msg);
                 }
             }
         };

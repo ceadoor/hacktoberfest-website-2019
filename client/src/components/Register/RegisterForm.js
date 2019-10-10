@@ -44,8 +44,8 @@ const RegisterForm = ({ hidePrevCount }) => {
             }
         } catch ({ response: { data } }) {
             setErrored(true);
-            if (data && data.message) {
-                setMessage(data.message);
+            if (data && data.error && data.error.msg) {
+                setMessage(data.error.msg);
             }
         } finally {
             setLoading(false);

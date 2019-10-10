@@ -50,7 +50,7 @@ exports.registerCandidate = async (req, res) => {
     if (status) {
         return res.status(201).json({ status, message, user: response.user, mailStatus: response.mailStatus });
     }
-    return res.status(403).json({ status, message });
+    return res.status(403).json({ status, error: { msg: message } });
 };
 
 /**
@@ -62,7 +62,7 @@ exports.getRemainingSeatsNumber = async (req, res) => {
     if (status) {
         return res.status(200).json({ status, message, seatsCount: response.seatsCount });
     }
-    return res.status(403).json({ status, message });
+    return res.status(403).json({ status, error: { msg: message } });
 };
 
 /**
@@ -75,5 +75,5 @@ exports.getIndividualRecord = async (req, res) => {
     if (status) {
         return res.status(200).json({ status, message, user: response.user });
     }
-    return res.status(403).json({ status, message });
+    return res.status(403).json({ status, error: { msg: message } });
 };
