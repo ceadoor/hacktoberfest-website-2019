@@ -269,7 +269,9 @@ exports.getGSheetRawContents = async () => {
 };
 
 const sendEnquiryEmail = async ({ name, email, uuid, department, year }) => {
-    const message = `Hi ${name},<br /><br /> Your registration to attend hacktoberfest powered by TRACECEA is successful.<br /><br /> Here is your ID: <b>${uuid}</b>. <br /><br /> Bring College ID along when you attend the event on 10th October @ 9:30am.<br />`;
+    const url = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${uuid}`;
+
+    const message = `Hi ${name},<br /><br /> Your registration to attend hacktoberfest powered by TRACECEA is successful.<br /><br /> Here is your QRCODE: <br /> <img src='${url}' alt="QR Code" /> <br /><br /> Bring College ID along when you attend the event on 10th October @ 9:30am.<br />`;
 
     const mailOptions = {
         from: `TraceCEA | Hacktoberfest 2019 <tracecea@protonmail.com>`,
