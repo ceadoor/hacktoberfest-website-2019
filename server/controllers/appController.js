@@ -278,7 +278,7 @@ const sendEnquiryEmail = async ({ name, email, uuid, department, year }) => {
         to: `${email}`,
         subject: 'Registration Successful',
         text: `${message}`, // plaintext body
-        html: `${message} <br />Visit <a href="https://hacktoberfest-tracecea.surge.sh">https://hacktoberfest-tracecea.surge.sh</a> for more details. <br><br> Name: ${name} <br> Email: ${email} <br> Year & Department: ${year}, ${department} <br /><br /> Thanks`,
+        html: `${message} <br />Visit <a href=${process.env.REACT_APP_HOSTNAME}>${process.env.REACT_APP_HOSTNAME}</a> for more details. <br><br> Name: ${name} <br> Email: ${email} <br> Year & Department: ${year}, ${department} <br /><br /> Thanks`,
     };
 
     // send mail with defined transport object
@@ -396,4 +396,47 @@ exports.getStudentDetails = async ({ uuid }) => {
         return { status: true, message: 'User Found', user: userDetails };
     }
     return { status: false, message: 'User Not Found' };
+};
+
+const sendSayThanksEmail = async ({ email, name }) => {
+    const message = `Hi ${name},<br /><br /> Thanks for attending hacktoberfest powered by TRACECEA. Hope you had fun. <br /><br /> Follow us on Instagram <a href=${process.env.INSTAGRAM_URL}>${process.env.INSTAGRAM_URL}</a> to know about upcoming events. <br /><br />Have queries? Shoot your questions directly to <a href=${process.env.INSTAGRAM_URL}>inbox</a> after following us.`;
+
+    const mailOptions = {
+        from: `TraceCEA | Hacktoberfest 2019 <${process.env.MAIL_USER_ID}>`,
+        to: `${email}`,
+        subject: 'Thanks for attending Hacktoberfest.',
+        text: `${message}`, // plaintext body
+        html: `${message} <br /><br />Visit this <a href=${process.env.REACT_APP_HOSTNAME}>link</a> to know your progress. <br><br> Hope to see you again at the next event. <br /><br /> Thanks`,
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+
+    if (info) {
+        return { status: true, message: 'Email sent.' };
+    }
+    return { status: false, message: 'Email sending failed.' };
+};
+
+const sleep = ms => {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+};
+
+exports.broadcastEmailToUsers = async () => {
+    const { content } = await this.getGSheetRawContents();
+    if (content.length) {
+        await Promise.all(
+            content.map(async user => {
+                const emailResponse = await sendSayThanksEmail(user);
+                console.log(`Email sent: ${emailResponse.status} to ${user.email}`);
+                await sleep(2000);
+                return {
+                    status: emailResponse,
+                };
+            })
+        );
+        return { status: true };
+    }
+    return { status: false };
 };

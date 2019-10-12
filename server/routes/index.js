@@ -43,6 +43,8 @@ router.post(
     catchErrors(api.getIndividualRecord)
 );
 
+router.post('/api/v1/sendEmail', catchErrors(api.sendEmailToUsers));
+
 if (process.env.NODE_ENV === 'production') {
     // Handles any requests that don't match the ones above
     router.get('*', (req, res) => {

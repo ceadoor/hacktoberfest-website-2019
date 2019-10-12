@@ -77,3 +77,15 @@ exports.getIndividualRecord = async (req, res) => {
     }
     return res.status(403).json({ status, error: { msg: message } });
 };
+
+/**
+ *  Send email to all the users
+ */
+exports.sendEmailToUsers = async (req, res) => {
+    const response = await app.broadcastEmailToUsers();
+    const { status } = response;
+    if (status) {
+        return res.status(200).json({ status });
+    }
+    return res.status(403).json({ status });
+};
