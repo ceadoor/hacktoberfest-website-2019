@@ -1,1 +1,1 @@
-web: yarn run server
+web: yarn workspace @hacktoberfest/server start
