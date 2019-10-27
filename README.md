@@ -16,6 +16,7 @@
     - [React Bootstrap](https://react-bootstrap.github.io/)
     - [React Router Dom](https://www.npmjs.com/package/react-router-dom)
     - [Sass](https://sass-lang.com/)
+<hr />
  
 ## 🚀 Quick Start
 
